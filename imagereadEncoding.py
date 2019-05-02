@@ -3,10 +3,14 @@ import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.pyplot as plt
 import colorsys
 from PIL import Image
-import tkinter as tk
+import sys
 
 #tk.Spinbox()
-img_file = Image.open("theview.jpg")
+print('Paveiklsliuko pavadinimas: ', sys.argv[1])
+imageName = sys.argv[1]
+print('Koduojamas tekstas ', sys.argv[2])
+
+img_file = Image.open(imageName)
 
 img = img_file.resize((256, 256), Image.ANTIALIAS)
 
@@ -109,9 +113,10 @@ def hilbert2xy(hindex, N, text, bits, it):
 N = 256
 #print(textLength)
 it = 0
-text = 'Tas grazus gyvenimas, kai tau astuoneri'
+text = sys.argv[2]
 for i in range(0,N*N):  
   hilbert2xy(i,N, text, 2, it)
   it = it + 1
 img.save("test.png")
 print("Paveikslėlis išsaugotas darbiniame aplankale. pavadinimu 'test.png'")
+print("Užkoduoto teksto ilgis: ", len(text))

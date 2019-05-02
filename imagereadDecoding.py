@@ -3,10 +3,12 @@ import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.pyplot as plt
 import colorsys
 from PIL import Image
-import tkinter as tk
+import sys
 
 #tk.Spinbox()
-img_file = Image.open("test.png")
+imageName = sys.argv[1]
+textLength = sys.argv[2]
+img_file = Image.open(imageName)
 
 img = img_file.resize((256, 256), Image.ANTIALIAS)
 
@@ -94,7 +96,7 @@ def hilbert2xy(hindex, N, textLength, bits, it):
 
 N = 256
 decodedText = []
-text = 'Tas grazus gyvenimas, kai tau astuoneri'
+text = 'Tasgrazusgyvenimas,kaitauastuoneri'
 textLength = len(text) #turi buti argv
 #print(textLength)
 it = 0

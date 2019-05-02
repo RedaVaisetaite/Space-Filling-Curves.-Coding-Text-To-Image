@@ -7,7 +7,7 @@ import sys
 
 #tk.Spinbox()
 imageName = sys.argv[1]
-textLength = sys.argv[2]
+textLength = int(sys.argv[2])
 img_file = Image.open(imageName)
 
 img = img_file.resize((256, 256), Image.ANTIALIAS)
@@ -96,8 +96,7 @@ def hilbert2xy(hindex, N, textLength, bits, it):
 
 N = 256
 decodedText = []
-text = 'Tasgrazusgyvenimas,kaitauastuoneri'
-textLength = len(text) #turi buti argv
+ #turi buti argv
 #print(textLength)
 it = 0
 for i in range(0,N*N): 

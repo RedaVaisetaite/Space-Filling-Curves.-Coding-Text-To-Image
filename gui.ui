@@ -27,7 +27,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>310</y>
+      <y>270</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -51,8 +51,8 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="result">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>310</y>
+      <x>150</x>
+      <y>250</y>
       <width>231</width>
       <height>61</height>
      </rect>
@@ -556,7 +556,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>110</y>
+      <y>150</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -578,9 +578,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>140</y>
+      <y>180</y>
       <width>361</width>
-      <height>161</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -591,7 +591,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>310</y>
+      <y>270</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -612,8 +612,68 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string>Užkoduoti</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="compareImage">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>320</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(34, 88, 145);
+gridline-color: rgb(202, 202, 202);
+selection-color: rgb(85, 255, 255);
+selection-background-color: rgb(39, 96, 166);</string>
+    </property>
+    <property name="text">
+     <string>Palyginti paveikslėlius</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelName">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>110</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto paveiksliuko&lt;br/&gt;pavadinimą&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="decodedname">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>110</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255,255,255)
+</string>
+    </property>
+   </widget>
    <zorder>textEdit</zorder>
-   <zorder>aboutBrowser</zorder>
    <zorder>encode</zorder>
    <zorder>label1</zorder>
    <zorder>imagepath</zorder>
@@ -631,6 +691,10 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>compare</zorder>
    <zorder>labelImage</zorder>
    <zorder>label</zorder>
+   <zorder>compareImage</zorder>
+   <zorder>labelName</zorder>
+   <zorder>decodedname</zorder>
+   <zorder>aboutBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

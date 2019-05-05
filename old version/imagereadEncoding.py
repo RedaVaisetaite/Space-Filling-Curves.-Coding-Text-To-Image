@@ -1,20 +1,20 @@
-#import numpy as np
-#import mpl_toolkits.mplot3d.axes3d as p3
-#import matplotlib.pyplot as plt
-#import colorsys
-#from PIL import Image
-#import sys
+import numpy as np
+import mpl_toolkits.mplot3d.axes3d as p3
+import matplotlib.pyplot as plt
+import colorsys
+from PIL import Image
+import sys
 
 #tk.Spinbox()
-#print('Paveiklsliuko pavadinimas: ', sys.argv[1])
-#imageName = sys.argv[1]
-#print('Koduojamas tekstas ', sys.argv[2])
+print('Paveiklsliuko pavadinimas: ', sys.argv[1])
+imageName = sys.argv[1]
+print('Koduojamas tekstas ', sys.argv[2])
 
-#img_file = Image.open(imageName)
+img_file = Image.open(imageName)
 
-#img = img_file.resize((256, 256), Image.ANTIALIAS)
+img = img_file.resize((256, 256), Image.ANTIALIAS)
 
-#img_resized = img.load() #uzsikraunam pikselius
+img_resized = img.load() #uzsikraunam pikselius
 
 def getSum(a, b):
     while b:
@@ -22,7 +22,7 @@ def getSum(a, b):
     return a
 
 # (2) Get image width & height in pixels
-#[xs, ys] = img.size    
+[xs, ys] = img.size    
 
 #check if the color is not out of limit
 #def clamp(x): 
@@ -66,7 +66,7 @@ def last2bits(hindex):
 
 def rshift(val, n): return (val % 0x100000000) >> n
 
-def hilbert2xy(hindex, N, text, bits, it, img_resized):
+def hilbert2xy(hindex, N, text, bits, it):
   positions = [
     [0, 0],
     [0, 1],
@@ -110,13 +110,13 @@ def hilbert2xy(hindex, N, text, bits, it, img_resized):
       
     
 
-#N = 256
+N = 256
 #print(textLength)
-#it = 0
-#text = sys.argv[2]
-#for i in range(0,N*N):  
-#  hilbert2xy(i,N, text, 2, it)
-#  it = it + 1
-#img.save("test.png")
-#print("Paveikslėlis išsaugotas darbiniame aplankale. pavadinimu 'test.png'")
-#print("Užkoduoto teksto ilgis: ", len(text))
+it = 0
+text = sys.argv[2]
+for i in range(0,N*N):  
+  hilbert2xy(i,N, text, 2, it)
+  it = it + 1
+img.save("test.png")
+print("Paveikslėlis išsaugotas darbiniame aplankale. pavadinimu 'test.png'")
+print("Užkoduoto teksto ilgis: ", len(text))

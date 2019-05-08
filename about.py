@@ -1,6 +1,5 @@
 import imagereadDecoding
 import numpy as np
-import os
 import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.pyplot as plt
 import colorsys
@@ -12,7 +11,8 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.uic import loadUi
 import imagereadEncoding
 import os
-#225891
+from pathlib import Path
+
 StyleSheet = '''
 QPushButton {
     background-color: #225891;
@@ -72,44 +72,53 @@ class Window(QtWidgets.QMainWindow):
         self.compareImage.clicked.connect(self.compareImage_clicked)
         self.encode.clicked.connect(self.encodeButton_clicked)
         self.browse.clicked.connect(self.getImage)
+        self.RGBcomboBox.setStyleSheet('color: white; font: 10pt "Microsoft YaHei"')
     @pyqtSlot()
     
     def decodeButton_clicked(self):
         
         textLength = self.textLength.value()
         imagePath = self.imagepath.text()
-        img = Image.open(imagePath)
-        #uzsikraunam pikselius
-        img_resized = img.load()
-        [xs, ys] = img.size
-        # img = img_file.resize((256, 256), Image.ANTIALIAS)
+        if Path(imagePath).is_file():
+            img = Image.open(imagePath)
+            #uzsikraunam pikselius
+            img_resized = img.load()
+            [xs, ys] = img.size
+            # img = img_file.resize((256, 256), Image.ANTIALIAS)
 
          
-        N = highestPowerof2(min(xs,ys))
-        decodedText = []
-        it = 0
-        for i in range(0,N*N): 
-      #ir dar vietoj texto padavineti teksto ilgi, kuri gausim is parametru      
-          if (it < textLength * 4):
-            letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized)          
-            m = it          
-    #print(decodedText)
-            if (it >= textLength):
-              m = it%textLength
-              decodedText[m] = decodedText[m] + letter
-            else:
-              decodedText.append(letter)        
-          it = it + 1
+            N = highestPowerof2(min(xs,ys))
+            decodedText = []
+            it = 0
+            for i in range(0,N*N): 
+        #ir dar vietoj texto padavineti teksto ilgi, kuri gausim is parametru      
+                if (it < textLength * 4):
+                    letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized)          
+                    m = it          
+      #print(decodedText)
+                    if (it >= textLength):
+                        m = it%textLength
+                        decodedText[m] = decodedText[m] + letter
+                    else:
+                        decodedText.append(letter)        
+                it = it + 1
   
-        if (decodedText != []):
-          text = ''
-          for letter in decodedText:
-            text = text + chr(letter)
-        self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+            if (decodedText != []):
+                text = ''
+                for letter in decodedText:
+                    text = text + chr(letter)
+            self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+                font: 10pt "Microsoft YaHei"')
+            self.textEdit.setText("Dekoduotas tekstas: \n"+text)
+            self.textEdit.setDisabled(True)
+            self.textEdit.setVisible(True)
+        else:
+            self.symbols.setText("Paveisklėlis, kurį pasirinkote nerastas.\
+ Pažiūrėkite, \nar nurodėte tikslią paveikslėlio vietą (tikslų kelią iki jo)")
+            self.symbols.setStyleSheet('color: #ff4902; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
-        self.textEdit.setText("Dekoduotas tekstas: \n"+text)
-        self.textEdit.setDisabled(True)
-        self.textEdit.setVisible(True)
+            self.symbols.setVisible(True)
+            
 
     def compareImage_clicked(self):
         #self.ui.buttonBox.button(QDialogButtonBox.Ok).setText("Gerai")
@@ -132,29 +141,39 @@ class Window(QtWidgets.QMainWindow):
 
     def encodeButton_clicked(self):
         imagePath = self.imagepath.text()
-        img = Image.open(imagePath)
+        if Path(imagePath).is_file():
+            img = Image.open(imagePath)
 
-        img_resized = img.load() #uzsikraunam pikselius
-        [xs,ys] = img.size
-        N = highestPowerof2(min(xs,ys))
-        symbolsCount = N*N/4*3 #*3 nes turim r,g,b; /4, nes koduojam po du bitukus, 
-        # tai viena baitui uzkoduoti reikia 4pikseliu
-        it = 0
-        text = self.textEdit.toPlainText()
-        for i in range(0,N*N):  
-          if (it < len(text) * 4):
-            imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized)
-            it = it + 1
-        path = "uzkoduoti/"
-        decodedname = self.decodedname.text()
-        img.save(path + decodedname)
-        self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
-            font: 10pt "Microsoft YaHei"')
-        self.textEdit.setText("Užkoduoto teksto ilgis: "+str(len(text))+
+            img_resized = img.load() #uzsikraunam pikselius
+            [xs,ys] = img.size
+            N = highestPowerof2(min(xs,ys))
+            symbolsCount = N*N/4*3 #*3 nes turim r,g,b; /4, nes koduojam po du bitukus, 
+            # tai viena baitui uzkoduoti reikia 4pikseliu
+            it = 0
+            text = self.textEdit.toPlainText()
+            for i in range(0,N*N):  
+                if (it < len(text) * 4):
+                    imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized)
+                    it = it + 1
+            path = "uzkoduoti/"
+            if not self.decodedname.text():
+                decodedname = "test.png"
+            else:
+                decodedname = self.decodedname.text()
+            img.save(path + decodedname)
+            self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+                font: 10pt "Microsoft YaHei"')
+            self.textEdit.setText("Užkoduoto teksto ilgis: "+str(len(text))+
 "\nUžkoduotas paveikslėlis išsaugotas uzkoduoti folderyje "+decodedname+" pavadinimu"+
 "\nUžkoduotas tekstas: "+text)
-        self.textEdit.setVisible(True)
-        self.compareImage.setVisible(True)
+            self.textEdit.setVisible(True)
+            self.compareImage.setVisible(True)
+        else:
+            self.symbols.setText("Paveisklėlis, kurį pasirinkote nerastas.\
+ Pažiūrėkite, \nar nurodėte tikslią paveikslėlio vietą (tikslų kelią iki jo)")
+            self.symbols.setStyleSheet('color: #ff4902; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+            self.symbols.setVisible(True)
 
     def about_clicked(self):
         self.labelImage.setVisible(False)
@@ -172,6 +191,7 @@ class Window(QtWidgets.QMainWindow):
         self.label.setVisible(False)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(True)
+        self.RGBcomboBox.setVisible(False)
 
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -193,6 +213,7 @@ class Window(QtWidgets.QMainWindow):
         self.label.setVisible(True)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
+        self.RGBcomboBox.setVisible(False)
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -214,6 +235,7 @@ class Window(QtWidgets.QMainWindow):
         self.label1.setVisible(True)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
+        self.RGBcomboBox.setVisible(True)
         
     def getImage(self):
       cwd = os.getcwd()

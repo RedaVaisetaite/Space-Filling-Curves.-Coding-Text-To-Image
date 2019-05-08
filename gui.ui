@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>716</width>
-    <height>437</height>
+    <width>729</width>
+    <height>557</height>
    </rect>
   </property>
   <property name="font">
@@ -26,8 +26,8 @@
    <widget class="QPushButton" name="decode">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>270</y>
+      <x>600</x>
+      <y>430</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -52,7 +52,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>250</y>
+      <y>420</y>
       <width>231</width>
       <height>61</height>
      </rect>
@@ -374,10 +374,10 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>270</x>
       <y>10</y>
-      <width>251</width>
-      <height>21</height>
+      <width>311</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -393,7 +393,7 @@ selection-color: rgb(85, 255, 255);
 selection-background-color: rgb(39, 96, 166);</string>
     </property>
     <property name="text">
-     <string>Erdvę užpildančios kreivės</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;ERDVĘ UŽPILDANČIOS KREIVĖS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="browse">
@@ -525,8 +525,8 @@ selection-background-color: rgb(39, 96, 166);</string>
      <rect>
       <x>140</x>
       <y>50</y>
-      <width>581</width>
-      <height>371</height>
+      <width>591</width>
+      <height>541</height>
      </rect>
     </property>
     <property name="font">
@@ -556,7 +556,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>150</y>
+      <y>290</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -578,9 +578,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>180</y>
-      <width>361</width>
-      <height>71</height>
+      <y>330</y>
+      <width>561</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -590,8 +590,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="encode">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>270</y>
+      <x>600</x>
+      <y>430</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -615,8 +615,8 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QPushButton" name="compareImage">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>320</y>
+      <x>560</x>
+      <y>470</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -673,6 +673,23 @@ selection-background-color: rgb(39, 96, 166);</string>
 </string>
     </property>
    </widget>
+   <widget class="QLabel" name="symbols">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>260</y>
+      <width>541</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>aboutBrowser</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
    <zorder>label1</zorder>
@@ -694,15 +711,15 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>compareImage</zorder>
    <zorder>labelName</zorder>
    <zorder>decodedname</zorder>
-   <zorder>aboutBrowser</zorder>
+   <zorder>symbols</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>716</width>
-     <height>25</height>
+     <width>729</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

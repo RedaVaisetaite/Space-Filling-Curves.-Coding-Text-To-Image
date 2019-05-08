@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>672</width>
-    <height>315</height>
+    <width>843</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
-     <width>671</width>
-     <height>271</height>
+     <y>30</y>
+     <width>831</width>
+     <height>541</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -30,6 +30,9 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="image1">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(0,0,0,0%)</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -37,6 +40,9 @@
       </item>
       <item>
        <widget class="QLabel" name="image2">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(0,0,0,0%)</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -55,6 +61,50 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(0,0,0,0%)</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;KODUOJAMAS PAVEIKSLĖLIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>0</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(0,0,0,0%)</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;UŽKODUOTAS PAVEIKSLĖLIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
   </widget>
  </widget>
  <resources/>

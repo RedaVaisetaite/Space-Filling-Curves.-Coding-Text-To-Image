@@ -38,6 +38,18 @@ QPushButton:hover {
     color: #fff;
 }
 '''
+def highestPowerof2(n): 
+  
+    res = 0; 
+    for i in range(n, 0, -1): 
+          
+        # If i is a power of 2 
+        if ((i & (i - 1)) == 0): 
+          
+            res = i; 
+            break; 
+          
+    return res; 
 class Window(QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -66,12 +78,14 @@ class Window(QtWidgets.QMainWindow):
         
         textLength = self.textLength.value()
         imagePath = self.imagepath.text()
-        img_file = Image.open(imagePath)
+        img = Image.open(imagePath)
+        #uzsikraunam pikselius
+        img_resized = img.load()
+        [xs, ys] = img.size
+        # img = img_file.resize((256, 256), Image.ANTIALIAS)
 
-        img = img_file.resize((256, 256), Image.ANTIALIAS)
-
-        img_resized = img.load() #uzsikraunam pikselius
-        N = 256
+         
+        N = highestPowerof2(min(xs,ys))
         decodedText = []
         it = 0
         for i in range(0,N*N): 
@@ -98,6 +112,8 @@ class Window(QtWidgets.QMainWindow):
         self.textEdit.setVisible(True)
 
     def compareImage_clicked(self):
+        #self.ui.buttonBox.button(QDialogButtonBox.Ok).setText("Gerai")
+        #self.ui.buttonBox.button(QDialogButtonBox.Cancel).setText("Uždaryti")
         imageencoded = self.imagepath.text()
         imagedecoded = "uzkoduoti/" + self.decodedname.text()
         Dialog = QtWidgets.QDialog()
@@ -116,12 +132,13 @@ class Window(QtWidgets.QMainWindow):
 
     def encodeButton_clicked(self):
         imagePath = self.imagepath.text()
-        img_file = Image.open(imagePath)
-
-        img = img_file.resize((256, 256), Image.ANTIALIAS)
+        img = Image.open(imagePath)
 
         img_resized = img.load() #uzsikraunam pikselius
-        N = 256
+        [xs,ys] = img.size
+        N = highestPowerof2(min(xs,ys))
+        symbolsCount = N*N/4*3 #*3 nes turim r,g,b; /4, nes koduojam po du bitukus, 
+        # tai viena baitui uzkoduoti reikia 4pikseliu
         it = 0
         text = self.textEdit.toPlainText()
         for i in range(0,N*N):  
@@ -131,13 +148,17 @@ class Window(QtWidgets.QMainWindow):
         path = "uzkoduoti/"
         decodedname = self.decodedname.text()
         img.save(path + decodedname)
-        self.result.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%)')
-        self.result.setText("Užkoduoto teksto ilgis: "+str(len(text)))
-        self.result.setVisible(True)
+        self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+        self.textEdit.setText("Užkoduoto teksto ilgis: "+str(len(text))+
+"\nUžkoduotas paveikslėlis išsaugotas uzkoduoti folderyje "+decodedname+" pavadinimu"+
+"\nUžkoduotas tekstas: "+text)
+        self.textEdit.setVisible(True)
         self.compareImage.setVisible(True)
 
     def about_clicked(self):
         self.labelImage.setVisible(False)
+        self.symbols.setVisible(False)
         self.labelName.setVisible(False)
         self.decodedname.setVisible(False)
         self.compareImage.setVisible(False)
@@ -153,7 +174,11 @@ class Window(QtWidgets.QMainWindow):
         self.aboutBrowser.setVisible(True)
 
     def decodedMenu_clicked(self):
+        self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+        self.labelImage.setText("Pasirinkite norimą atkoduoti\npaveikslėlį")  
         self.labelImage.setVisible(True)
+        self.symbols.setVisible(False)
         self.labelName.setVisible(False)
         self.decodedname.setVisible(False)
         self.compareImage.setVisible(False)
@@ -163,16 +188,18 @@ class Window(QtWidgets.QMainWindow):
         self.textLength.setVisible(True)
         self.decode.setVisible(True)
         self.browse.setVisible(True)
+        self.imagename.setText("")
         self.imagename.setVisible(True)
         self.label.setVisible(True)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
 
     def encodedMenu_clicked(self):
-        self.labelImage.setText("Pasirinkite norimą užkoduoti\npaveikslėlį")
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
+        self.labelImage.setText("Pasirinkite norimą užkoduoti\npaveikslėlį")        
         self.labelImage.setVisible(True)
+        self.symbols.setVisible(False)
         self.labelName.setVisible(True)
         self.decodedname.setVisible(True)
         self.compareImage.setVisible(False)
@@ -181,7 +208,8 @@ class Window(QtWidgets.QMainWindow):
         self.decode.setVisible(False)
         self.encode.setVisible(True)
         self.browse.setVisible(True)
-        self.imagename.setVisible(True)
+        self.imagename.setText("")
+        #self.imagename.setVisible(True)
         self.label.setVisible(False)
         self.label1.setVisible(True)
         self.result.setVisible(False)
@@ -192,9 +220,21 @@ class Window(QtWidgets.QMainWindow):
       fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file',
                             cwd, "Image files (*.jpg *.jpeg, *.png)")
       imagePath = fname[0]
+      img = Image.open(imagePath)
+      img_resized = img.load() #uzsikraunam pikselius
+      [xs,ys] = img.size
+      N = highestPowerof2(min(xs,ys))
+      symbolsCount = N*N/4*3
       imageName = imagePath.split("/")[-1]
       self.imagename.setText(imageName)
       self.imagepath.setText(imagePath)
+      if (self.labelImage.text()=="Pasirinkite norimą užkoduoti\npaveikslėlį"):
+        self.symbols.setText('Maksimalus simbolių skaičius, kurį galite užkoduoti \
+yra '+str(int(symbolsCount))+', \njeigu pasirinksite kodavimą visose trijose rgb kodo \
+koordinatėse')
+        self.symbols.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+        self.symbols.setVisible(True)
       
 
 app = QtWidgets.QApplication(sys.argv)

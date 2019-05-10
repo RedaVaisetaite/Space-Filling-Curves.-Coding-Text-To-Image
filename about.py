@@ -92,7 +92,7 @@ class Window(QtWidgets.QMainWindow):
             decodedText = []
             it = 0
             rgbValue = str(self.RGBcomboBox.currentText())
-            rgbValue = 'r g'
+            # rgbValue = 'r g'
             if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
                 for i in range(0,N*N):
                     if (it < textLength * 4):
@@ -106,8 +106,6 @@ class Window(QtWidgets.QMainWindow):
                     it = it + 1
             elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'b g':
                 rgbValue = rgbValue.split(' ')
-                # for i in range(0,N*N):  
-                #if (it < textLength * 4):
                 if (textLength <= symbolsCount):
                     for i in range(0,N*N):
                         if (it < textLength * 4):
@@ -115,7 +113,6 @@ class Window(QtWidgets.QMainWindow):
                             m = it
                             if (it >= textLength):
                                 m = it%textLength
-                                #print(m)
                                 decodedText[m] = decodedText[m] + letter
                             else:
                                 decodedText.append(letter)        
@@ -123,7 +120,6 @@ class Window(QtWidgets.QMainWindow):
                 else:     
                     lastText = textLength - symbolsCount
                     lastText = int(lastText)
-                    #print(lastText)
                     nextletter = symbolsCount
                     it1 = 0
                     it2 = lastText 
@@ -148,15 +144,11 @@ class Window(QtWidgets.QMainWindow):
                                 #m = it1                            
                             m = it1
                             if (nextletter >= textLength):                                
-                                if (it1==lastText+3):
+                                if (it1==lastText*2):
                                     it2 = it2 + lastText
-                                elif (it1==lastText+6):
+                                elif (it1==lastText*3):
                                     it2 = it2 + lastText
                                 m = int(nextletter - it2)
-                                # if (it1==lastText+4 or it1==lastText+5 or it1==lastText+6 or it1==lastText+7):
-                                #     it2 = it2 + lastText
-                                # elif (it1==lastText+8 or it1==lastText+9 or it1==lastText+10 or it1==lastText+11):
-                                #     it2 = it2 + lastText
                                 decodedText[m] = decodedText[m] + letter
                             else:
                                 decodedText.append(letter)
@@ -170,11 +162,11 @@ class Window(QtWidgets.QMainWindow):
                 #text = ''
                 for letter in decodedText:
                     text = text + chr(letter)
-            self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+            self.result.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
                 font: 10pt "Microsoft YaHei"')
-            self.textEdit.setText("Dekoduotas tekstas: \n"+text)
-            self.textEdit.setDisabled(True)
-            self.textEdit.setVisible(True)
+            self.result.setText("Dekoduotas tekstas: \n"+text)
+            #self.textEdit.setDisabled(True)
+            self.result.setVisible(True)
         else:
             self.symbols.setText("Paveisklėlis, kurį pasirinkote nerastas.\
  Pažiūrėkite, \nar nurodėte tikslią paveikslėlio vietą (tikslų kelią iki jo)")
@@ -198,7 +190,8 @@ class Window(QtWidgets.QMainWindow):
         Dialog.image1.setPixmap(QPixmap(pixmapEncoded))
         #Dialog.image1.resize(pixmapEncoded.width(), pixmapEncoded.height())
         Dialog.image2.setPixmap(QPixmap(pixmapDecoded))
-        Dialog.image2.resize(pixmapDecoded.width(), pixmapDecoded.height())    
+        Dialog.image2.resize(pixmapDecoded.width(), pixmapDecoded.height()) 
+        Dialog.resize(pixmapDecoded.width()+pixmapEncoded.width(), pixmapDecoded.height())   
         Dialog.show()
         Dialog.exec_()
 
@@ -231,38 +224,24 @@ class Window(QtWidgets.QMainWindow):
                         imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue)
                         it = it + 1
             elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'b g':
-                rgbValue = rgbValue.split(' ')
-                # for i in range(0,N*N):  
+                rgbValue = rgbValue.split(' ')  
                 if (it < len(text) * 4):
                     if (len(text) <= symbolsCount):
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue[0])
                             it = it + 1
                     else:
-                        #print('labas') 
                         text1 = text[:int(symbolsCount)]
-                        textLast = text[int(symbolsCount):]  
-                        print('text1',text1)     
+                        textLast = text[int(symbolsCount):]      
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, text1, 2, it, img_resized, rgbValue[0])
                             it = it + 1
-                            #print('nutaselse')
                         lastText = int(symbolsCount)
                         #print(text[lastText:])
                         for i in range(0,N*N):
-                            print('it1encode', it1)
                             imagereadEncoding.hilbert2xy(i,N, textLast, 2, it1, img_resized, rgbValue[1])
                             it = it + 1 
                             it1 = it1 + 1
-                            #print(rgbValue[1])
-                            #print(text[lastText:])        
-                        # it = it + 1        
-                #print(it)
-            # if ((len(text) > symbolsCount) and len(text) <= (symbolsCount * 2)):
-            #     for i in range(0,N*N):  
-            #     if (it < len(text) * 4):
-            #         imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue)
-            #         it = it + 1
             path = "uzkoduoti/"
             if not self.decodedname.text():
                 decodedname = "test.png"
@@ -321,7 +300,7 @@ class Window(QtWidgets.QMainWindow):
         self.label.setVisible(True)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
-        self.RGBcomboBox.setVisible(False)
+        self.RGBcomboBox.setVisible(True)
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\

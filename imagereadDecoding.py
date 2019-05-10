@@ -18,9 +18,19 @@ def decoding(b, it, bits, textLength):
 def last2bits(hindex):
   return (hindex & 3)
 
+def getRGBValue(rgbValue, img_resized):
+  [r, g, b] = img_resized 
+  if rgbValue == 'r':
+    return r
+  elif rgbValue == 'g':
+    return g
+  else:
+    return b
+
+
 def rshift(val, n): return (val % 0x100000000) >> n
 
-def hilbert2xy(hindex, N, textLength, bits, it, img_resized):
+def hilbert2xy(hindex, N, textLength, bits, it, img_resized, rgbValue):
   positions = [
     [0, 0],
     [0, 1],
@@ -53,6 +63,7 @@ def hilbert2xy(hindex, N, textLength, bits, it, img_resized):
 
       hindex = rshift(hindex, 2)
   #print(x,y)
-  [r, g, b] = img_resized[x, y]
-  letter = decoding(b, it, bits, textLength)
+  bb = getRGBValue(rgbValue, img_resized[x,y]) 
+  #[r, g, b] = img_resized[x, y]
+  letter = decoding(bb, it, bits, textLength)
   return (letter) 

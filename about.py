@@ -80,7 +80,6 @@ class Window(QtWidgets.QMainWindow):
         self.encode.setStyleSheet(StyleSheet1)
         self.decode.setStyleSheet(StyleSheet1)
         self.compare.setStyleSheet(StyleSheet1)
-        self.imagename.setText("Įveskite kelią")
         self.decodedMenu.clicked.connect(self.decodedMenu_clicked)
         # self.imagename.clicked.connect(self.imageName_clicked)
         self.encodedMenu.clicked.connect(self.encodedMenu_clicked)
@@ -88,6 +87,7 @@ class Window(QtWidgets.QMainWindow):
         self.compareImage.clicked.connect(self.compareImage_clicked)
         self.encode.clicked.connect(self.encodeButton_clicked)
         self.browse.clicked.connect(self.getImage)
+        self.compare.clicked.connect(self.compareMenu_clicked)
         self.RGBcomboBox.setStyleSheet('color: white; font: 10pt "Microsoft YaHei"')
     @pyqtSlot()
     
@@ -405,6 +405,7 @@ class Window(QtWidgets.QMainWindow):
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(True)
         self.RGBcomboBox.setVisible(False)
+        self.rgbLabel.setVisible(False)
 
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -427,6 +428,7 @@ class Window(QtWidgets.QMainWindow):
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(True)
+        self.rgbLabel.setVisible(True)
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -449,6 +451,7 @@ class Window(QtWidgets.QMainWindow):
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(True)
+        self.rgbLabel.setVisible(True)
         
     def getImage(self):
 
@@ -477,6 +480,29 @@ koordinatėse')
 
     # def imageName_clicked(self):
     #     self.imagename.setText("")
+    def compareMenu_clicked(self):
+        self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+        self.labelImage.setText("Pasirinkite norimą užkoduoti paveikslėlį")        
+        self.labelImage.setVisible(True)
+        self.symbols.setVisible(False)
+        self.labelName.setVisible(False)
+        self.decodedname.setVisible(False)
+        self.compareImage.setVisible(True)
+        self.textLength.setVisible(False)
+        self.textEdit.setVisible(False)
+        self.decode.setVisible(False)
+        self.encode.setVisible(False)
+        self.browse.setVisible(True)
+        self.imagename.setText("Arba įveskite kelią")
+        self.imagename.setVisible(True)
+        self.label.setVisible(False)
+        self.label1.setVisible(False)
+        self.result.setVisible(False)
+        self.aboutBrowser.setVisible(False)
+        self.RGBcomboBox.setVisible(False)
+        self.rgbLabel.setVisible(False)
+
       
 
 app = QtWidgets.QApplication(sys.argv)

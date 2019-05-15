@@ -40,31 +40,16 @@ QPushButton:hover {
 '''
 def highestPowerof2(n): 
   
-    res = 0 
+    res = 0; 
     for i in range(n, 0, -1): 
           
         # If i is a power of 2 
         if ((i & (i - 1)) == 0): 
           
-            res = i 
-            break 
+            res = i; 
+            break; 
           
-    return res 
-
-def decodedCycle(N, textLength, bits, it, img_resized, rgbValue):
-    decodedText = []
-    for i in range(0,N*N):
-        if (it < textLength * 4):
-            letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized, rgbValue)
-            m = it
-            if (it >= textLength):
-                m = it%textLength
-                decodedText[m] = decodedText[m] + letter
-            else:
-                decodedText.append(letter)        
-        it = it + 1
-    return decodedText, it
-
+    return res; 
 class Window(QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -82,7 +67,6 @@ class Window(QtWidgets.QMainWindow):
         self.compare.setStyleSheet(StyleSheet1)
         self.imagename.setText("Įveskite kelią")
         self.decodedMenu.clicked.connect(self.decodedMenu_clicked)
-        # self.imagename.clicked.connect(self.imageName_clicked)
         self.encodedMenu.clicked.connect(self.encodedMenu_clicked)
         self.decode.clicked.connect(self.decodeButton_clicked)
         self.compareImage.clicked.connect(self.compareImage_clicked)
@@ -100,37 +84,64 @@ class Window(QtWidgets.QMainWindow):
             #uzsikraunam pikselius
             img_resized = img.load()
             [xs, ys] = img.size
+            # img = img_file.resize((256, 256), Image.ANTIALIAS)
+
          
             N = highestPowerof2(min(xs,ys))
             symbolsCount = N*N/4
             decodedText = []
             it = 0
             rgbValue = str(self.RGBcomboBox.currentText())
-
+            # rgbValue = 'r g'
             if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
-                if (textLength > symbolsCount):
-                    textLength = symbolsCount
-                decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue)
-
-            elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
+                for i in range(0,N*N):
+                    if (it < textLength * 4):
+                        letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized, rgbValue)
+                        m = it
+                        if (it >= textLength):
+                            m = it%textLength
+                            decodedText[m] = decodedText[m] + letter
+                        else:
+                            decodedText.append(letter)        
+                    it = it + 1
+            elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'b g':
                 rgbValue = rgbValue.split(' ')
-
                 if (textLength <= symbolsCount):
-                    decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue[0])
-
+                    for i in range(0,N*N):
+                        if (it < textLength * 4):
+                            letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized, rgbValue[0])
+                            m = it
+                            if (it >= textLength):
+                                m = it%textLength
+                                decodedText[m] = decodedText[m] + letter
+                            else:
+                                decodedText.append(letter)        
+                        it = it + 1
                 else:     
                     lastText = textLength - symbolsCount
                     lastText = int(lastText)
-                    if (textLength > int(symbolsCount*2)):
-                        lastText = int(symbolsCount)
                     nextletter = symbolsCount
                     it1 = 0
-                    it2 = lastText  
-                    decodedText, it = decodedCycle(N, int(symbolsCount), 2, it, img_resized, rgbValue[0]) 
+                    it2 = lastText 
+                    for i in range(0,N*N):
+                        if (it < (textLength-lastText) * 4):
+                            letter = imagereadDecoding.hilbert2xy(i, N, int(textLength-lastText), 2, it, img_resized, rgbValue[0])
+                            m = it
+                            # print(m)
+                            if (it >= symbolsCount):
+                                m = int(it%symbolsCount)
+                                # print(m)
+                                decodedText[m] = decodedText[m] + letter
+                            else:
+                                decodedText.append(letter)        
+                        it = it + 1   
                     
                     for i in range(0,N*N):
+                        #print('nextvisad ', nextletter)
                         if (it1 < lastText * 4):
-                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it1, img_resized, rgbValue[1])                         
+                            #print(it1)
+                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it1, img_resized, rgbValue[1])
+                                #m = it1                            
                             m = it1
                             if (nextletter >= textLength):                                
                                 if (it1==lastText*2):
@@ -140,28 +151,36 @@ class Window(QtWidgets.QMainWindow):
                                 m = int(nextletter - it2)
                                 decodedText[m] = decodedText[m] + letter
                             else:
-                                decodedText.append(letter)      
+                                decodedText.append(letter)
+                                #print('pirma',m)       
                         it1 = it1 + 1
                         it = it + 1
                         nextletter = nextletter + 1 
-
             elif (rgbValue == 'r g b'):
-                rgbValue = rgbValue.split(' ') 
-
+                rgbValue = rgbValue.split(' ')
+                
                 lastText = 0
                 lastText2 = 0
-
                 if (textLength > symbolsCount and textLength <= (symbolsCount*2)):
                     lastText = textLength - symbolsCount
                 elif (textLength > symbolsCount and textLength > (symbolsCount*2)):
                     lastText = symbolsCount
                     lastText2 = textLength - symbolsCount*2
-                elif (textLength>int(symbolsCount*3)):
-                    lastText = symbolsCount
-                    lastText2 = symbolsCount
-
                 if (textLength < symbolsCount): 
-                    decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue[0])
+                    print('textLength ', textLength)
+                    for i in range(0,N*N):
+                    # print('pirmas for veikia')
+                        if (it < textLength * 4):
+                            letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized, rgbValue[0])
+                            m = it
+                        # print(m)
+                            if (it >= textLength):
+                                m = int(it%textLength)
+                            # print(m)
+                                decodedText[m] = decodedText[m] + letter
+                            else:
+                                decodedText.append(letter)        
+                        it = it + 1
 
                 lastText = int(lastText)
                 nextletter = symbolsCount
@@ -170,12 +189,11 @@ class Window(QtWidgets.QMainWindow):
                 it2 = lastText
                 it3 = lastText2
                 it4 = 0 
-
                 if (textLength >= symbolsCount):
                     for i in range(0,N*N):
                     # print('pirmas for veikia')
-                        if (it < int(symbolsCount) * 4):
-                            letter = imagereadDecoding.hilbert2xy(i, N, int(symbolsCount), 2, it, img_resized, rgbValue[0])
+                        if (it < lastText * 4):
+                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it, img_resized, rgbValue[0])
                             m = it
                         # print(m)
                             if (it >= symbolsCount):
@@ -185,7 +203,8 @@ class Window(QtWidgets.QMainWindow):
                             else:
                                 decodedText.append(letter)        
                         it = it + 1   
-
+                
+                if (textLength >= symbolsCount):    
                     for i in range(0,N*N):
                         # print('antras for veikia')
                     #print('nextvisad ', nextletter)
@@ -194,12 +213,7 @@ class Window(QtWidgets.QMainWindow):
                             letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it1, img_resized, rgbValue[1])
                                 #m = it1                            
                             m = it1
-                            gg = 0
-                            if (textLength>=int(symbolsCount*2)):
-                                gg = int(symbolsCount*2)
-                            else:
-                                gg = textLength
-                            if (nextletter >= gg):                                
+                            if (nextletter >= (symbolsCount*2)):                                
                                 if (it1==lastText*2):
                                     it2 = it2 + lastText
                                 elif (it1==lastText*3):
@@ -213,9 +227,10 @@ class Window(QtWidgets.QMainWindow):
                         it1 = it1 + 1
                         it = it + 1
                         nextletter = nextletter + 1
-
                 if (textLength >= symbolsCount*2): 
                     for i in range(0,N*N):
+                        # print('trecias for veikia')
+                    #print('nextvisad ', nextletter)
                         if (it4 < lastText2 * 4):
                         #print(it1)
                             letter = imagereadDecoding.hilbert2xy(i, N, lastText2, 2, it4, img_resized, rgbValue[2])
@@ -231,6 +246,7 @@ class Window(QtWidgets.QMainWindow):
                                 decodedText[m] = decodedText[m] + letter
                             else:
                                 decodedText.append(letter)
+                                print("teksto ilgis ", len(decodedText))
                             # print('pirma',m)       
                         it4 = it4 + 1
                         it = it + 1
@@ -282,31 +298,30 @@ class Window(QtWidgets.QMainWindow):
 
             img_resized = img.load() #uzsikraunam pikselius
             [xs,ys] = img.size
-
             N = highestPowerof2(min(xs,ys))
             symbolsCount = N*N/4
             # /4, nes koduojam po du bitukus, 
             # tai viena baitui uzkoduoti reikia 4pikseliu
-
             it = 0
             it1 = 0
             it2 = 0
             text = self.textEdit.toPlainText()
-            textLength = len(text)
-            rgbValue = str(self.RGBcomboBox.currentText())
+            # for i in range(0,N*N):  
+            #     if (it < len(text) * 4):
+            #         imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized)
+            #         it = it + 1
 
+            #BANDOM SU RGB
+            #symC = N*N/4 #is keturiu, nes koduojam dviejuose bitukuose
+            rgbValue = str(self.RGBcomboBox.currentText())
+            #print(rgbValue)
             if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
-                if (len(text) > symbolsCount):
-                    text = text[:int(symbolsCount)]
-                    textLength = symbolsCount
                 for i in range(0,N*N):  
                     if (it < len(text) * 4):
                         imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue)
                         it = it + 1
-
-            elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
-                rgbValue = rgbValue.split(' ') 
-
+            elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'b g':
+                rgbValue = rgbValue.split(' ')  
                 if (it < len(text) * 4):
                     if (len(text) <= symbolsCount):
                         for i in range(0,N*N):
@@ -316,22 +331,24 @@ class Window(QtWidgets.QMainWindow):
                         text1 = text[:int(symbolsCount)]
                         textLast = text[int(symbolsCount):]
                         if (len(text) > (symbolsCount*2)):
-                            textLast = text[int(symbolsCount):int(symbolsCount*2)]
-                            textLength = int(symbolsCount*2)
-
+                            textLast = text[int(symbolsCount):int(symbolsCount*2)]     
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, text1, 2, it, img_resized, rgbValue[0])
                             it = it + 1
-
+                        # lastText = int(symbolsCount)
+                        #print(text[lastText:])
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, textLast, 2, it1, img_resized, rgbValue[1])
                             it = it + 1 
                             it1 = it1 + 1
-
             elif rgbValue == 'r g b':
-                rgbValue = rgbValue.split(' ')
-
+                rgbValue = rgbValue.split(' ')  
                 if (it < len(text) * 4):
+                    # if (len(text) <= symbolsCount):
+                    #     for i in range(0,N*N):
+                    #         imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue[0])
+                    #         it = it + 1
+                    # else:
                     text1 = ''
                     text2 = ''
                     textLast = ''
@@ -343,26 +360,23 @@ class Window(QtWidgets.QMainWindow):
                         text2 = text[int(symbolsCount):int(symbolsCount*2)]
                         textLast = text[int(symbolsCount*2):]
                         if (len(text) > (symbolsCount*3)): 
-                            textLast = text[int(symbolsCount*2):int(symbolsCount*3)]
-                            textLength = int(symbolsCount*3)
-
-                    if (len(text) > symbolsCount):                       
+                            textLast = text[int(symbolsCount*2):int(symbolsCount*3)]                       
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, text1, 2, it, img_resized, rgbValue[0])
                             it = it + 1
-
-                        for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text2, 2, it1, img_resized, rgbValue[1])
-                            it = it + 1 
-                            it1 = it1 + 1
-
-                    if (len(text) > symbolsCount*2):
-                        for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, textLast, 2, it2, img_resized, rgbValue[2])
-                            it = it + 1 
-                            it2 = it2 + 1
-
-                    if (len(text) < symbolsCount):
+                        # lastText = int(symbolsCount)
+                        #print(text[lastText:])
+                        if (len(text) > symbolsCount):
+                            for i in range(0,N*N):
+                                imagereadEncoding.hilbert2xy(i,N, text2, 2, it1, img_resized, rgbValue[1])
+                                it = it + 1 
+                                it1 = it1 + 1
+                        if (len(text) > symbolsCount*2):
+                            for i in range(0,N*N):
+                                imagereadEncoding.hilbert2xy(i,N, textLast, 2, it2, img_resized, rgbValue[2])
+                                it = it + 1 
+                                it2 = it2 + 1
+                    elif (len(text) < symbolsCount):
                         for i in range(0,N*N):
                             imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue[0])
                             it = it + 1
@@ -376,9 +390,9 @@ class Window(QtWidgets.QMainWindow):
             img.save(path + decodedname)
             self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
                 font: 10pt "Microsoft YaHei"')
-            self.textEdit.setText("Užkoduoto teksto ilgis: "+str(textLength)+
+            self.textEdit.setText("Užkoduoto teksto ilgis: "+str(len(text))+
 "\nUžkoduotas paveikslėlis išsaugotas uzkoduoti folderyje "+decodedname+" pavadinimu"+
-"\nUžkoduotas tekstas: "+text[:textLength])
+"\nUžkoduotas tekstas: "+text)
             self.textEdit.setVisible(True)
             self.compareImage.setVisible(True)
         else:
@@ -409,7 +423,7 @@ class Window(QtWidgets.QMainWindow):
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
-        self.labelImage.setText("Pasirinkite norimą dekoduoti paveikslėlį")  
+        self.labelImage.setText("Pasirinkite norimą atkoduoti\npaveikslėlį")  
         self.labelImage.setVisible(True)
         self.symbols.setVisible(False)
         self.labelName.setVisible(False)
@@ -421,7 +435,7 @@ class Window(QtWidgets.QMainWindow):
         self.textLength.setVisible(True)
         self.decode.setVisible(True)
         self.browse.setVisible(True)
-        self.imagename.setText("Arba įveskite kelią")
+        self.imagename.setText("")
         self.imagename.setVisible(True)
         self.label.setVisible(True)
         self.result.setVisible(False)
@@ -431,7 +445,7 @@ class Window(QtWidgets.QMainWindow):
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
-        self.labelImage.setText("Pasirinkite norimą užkoduoti paveikslėlį")        
+        self.labelImage.setText("Pasirinkite norimą užkoduoti\npaveikslėlį")        
         self.labelImage.setVisible(True)
         self.symbols.setVisible(False)
         self.labelName.setVisible(True)
@@ -442,8 +456,8 @@ class Window(QtWidgets.QMainWindow):
         self.decode.setVisible(False)
         self.encode.setVisible(True)
         self.browse.setVisible(True)
-        self.imagename.setText("Arba įveskite kelią")
-        self.imagename.setVisible(True)
+        self.imagename.setText("")
+        #self.imagename.setVisible(True)
         self.label.setVisible(False)
         self.label1.setVisible(True)
         self.result.setVisible(False)
@@ -474,9 +488,6 @@ koordinatėse')
             self.symbols.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
             self.symbols.setVisible(True)
-
-    # def imageName_clicked(self):
-    #     self.imagename.setText("")
       
 
 app = QtWidgets.QApplication(sys.argv)

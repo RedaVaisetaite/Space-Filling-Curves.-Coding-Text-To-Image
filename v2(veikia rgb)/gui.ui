@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
+    <width>729</width>
     <height>557</height>
    </rect>
   </property>
@@ -311,10 +311,10 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QSpinBox" name="textLength">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>110</y>
+      <x>390</x>
+      <y>120</y>
       <width>51</width>
-      <height>31</height>
+      <height>22</height>
      </rect>
     </property>
     <property name="contextMenuPolicy">
@@ -336,9 +336,9 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>-200</x>
+      <x>140</x>
       <y>0</y>
-      <width>1351</width>
+      <width>591</width>
       <height>51</height>
      </rect>
     </property>
@@ -356,9 +356,9 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-128</y>
+      <y>-8</y>
       <width>141</width>
-      <height>761</height>
+      <height>541</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -399,7 +399,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QPushButton" name="browse">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>530</x>
       <y>70</y>
       <width>111</width>
       <height>31</height>
@@ -424,7 +424,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLineEdit" name="imagename">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>390</x>
       <y>70</y>
       <width>121</width>
       <height>31</height>
@@ -481,7 +481,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <rect>
       <x>150</x>
       <y>60</y>
-      <width>271</width>
+      <width>189</width>
       <height>42</height>
      </rect>
     </property>
@@ -495,7 +495,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string notr="true">background-color: rgba(0,0,0,0%)</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite paveiksliuko, kurį norite &lt;br/&gt;atkoduoti, pavadinimą&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite paveiksliuko, kurį &lt;br/&gt;norite atkoduoti, pavadinimą&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -525,7 +525,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <rect>
       <x>140</x>
       <y>50</y>
-      <width>641</width>
+      <width>591</width>
       <height>541</height>
      </rect>
     </property>
@@ -643,7 +643,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <rect>
       <x>150</x>
       <y>110</y>
-      <width>281</width>
+      <width>241</width>
       <height>41</height>
      </rect>
     </property>
@@ -657,13 +657,13 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string notr="true">background-color: rgba(0,0,0,0%)</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto paveiksliuko pavadinimą&lt;br/&gt;*Rašykite su .png išplėtiniu&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto paveiksliuko&lt;br/&gt;pavadinimą&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="decodedname">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>390</x>
       <y>110</y>
       <width>121</width>
       <height>31</height>
@@ -693,7 +693,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QComboBox" name="RGBcomboBox">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>390</x>
       <y>160</y>
       <width>121</width>
       <height>31</height>
@@ -940,29 +940,6 @@ selection-background-color: rgb(39, 96, 166);</string>
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="rgbLabel">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>150</y>
-      <width>241</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%)</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasrinkite rgb spalvos dalį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <zorder>aboutBrowser</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
    <zorder>label1</zorder>
@@ -986,14 +963,14 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>decodedname</zorder>
    <zorder>symbols</zorder>
    <zorder>RGBcomboBox</zorder>
-   <zorder>rgbLabel</zorder>
+   <zorder>aboutBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>780</width>
+     <width>729</width>
      <height>21</height>
     </rect>
    </property>

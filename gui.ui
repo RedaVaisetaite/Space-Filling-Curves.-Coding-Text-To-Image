@@ -962,6 +962,28 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasrinkite rgb spalvos dalį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QLabel" name="textCoded">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>430</y>
+      <width>361</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
    <zorder>aboutBrowser</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
@@ -987,6 +1009,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>symbols</zorder>
    <zorder>RGBcomboBox</zorder>
    <zorder>rgbLabel</zorder>
+   <zorder>textCoded</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

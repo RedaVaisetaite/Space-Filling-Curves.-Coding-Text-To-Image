@@ -88,6 +88,7 @@ class Window(QtWidgets.QMainWindow):
         self.encode.clicked.connect(self.encodeButton_clicked)
         self.browse.clicked.connect(self.getImage)
         self.compare.clicked.connect(self.compareMenu_clicked)
+        self.textEdit.textChanged.connect(self.textChangedCount)
         self.RGBcomboBox.setStyleSheet('color: white; font: 10pt "Microsoft YaHei"')
     @pyqtSlot()
     
@@ -172,19 +173,7 @@ class Window(QtWidgets.QMainWindow):
                 it4 = 0 
 
                 if (textLength >= symbolsCount):
-                    for i in range(0,N*N):
-                    # print('pirmas for veikia')
-                        if (it < int(symbolsCount) * 4):
-                            letter = imagereadDecoding.hilbert2xy(i, N, int(symbolsCount), 2, it, img_resized, rgbValue[0])
-                            m = it
-                        # print(m)
-                            if (it >= symbolsCount):
-                                m = int(it%symbolsCount)
-                            # print(m)
-                                decodedText[m] = decodedText[m] + letter
-                            else:
-                                decodedText.append(letter)        
-                        it = it + 1   
+                    decodedText, it = decodedCycle(N, int(symbolsCount), 2, it, img_resized, rgbValue[0])   
 
                     for i in range(0,N*N):
                         # print('antras for veikia')
@@ -470,7 +459,7 @@ class Window(QtWidgets.QMainWindow):
         imageName = imagePath.split("/")[-1]
         self.imagename.setText(imageName)
         self.imagepath.setText(imagePath)
-        if (self.labelImage.text()=="Pasirinkite norimą užkoduoti\npaveikslėlį"):
+        if (self.labelImage.text()=="Pasirinkite norimą užkoduoti paveikslėlį"):
             self.symbols.setText('Maksimalus simbolių skaičius, kurį galite užkoduoti \
 yra '+str(int(symbolsCount))+', \njeigu pasirinksite kodavimą visose trijose rgb kodo \
 koordinatėse')
@@ -503,6 +492,10 @@ koordinatėse')
         self.RGBcomboBox.setVisible(False)
         self.rgbLabel.setVisible(False)
 
+    def textChangedCount(self):
+        self.textCoded.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+                font: 10pt "Microsoft YaHei"')
+        self.textCoded.setText("Jau įvedėte "+str(len(self.textEdit.toPlainText()))+" simbolį(-ius)")
       
 
 app = QtWidgets.QApplication(sys.argv)

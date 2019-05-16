@@ -984,7 +984,6 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <zorder>aboutBrowser</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
    <zorder>label1</zorder>
@@ -1006,10 +1005,11 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>compareImage</zorder>
    <zorder>labelName</zorder>
    <zorder>decodedname</zorder>
-   <zorder>symbols</zorder>
    <zorder>RGBcomboBox</zorder>
    <zorder>rgbLabel</zorder>
    <zorder>textCoded</zorder>
+   <zorder>symbols</zorder>
+   <zorder>aboutBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

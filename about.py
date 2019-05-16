@@ -395,6 +395,7 @@ class Window(QtWidgets.QMainWindow):
         self.aboutBrowser.setVisible(True)
         self.RGBcomboBox.setVisible(False)
         self.rgbLabel.setVisible(False)
+        self.textCoded.setVisible(False)
 
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -418,6 +419,7 @@ class Window(QtWidgets.QMainWindow):
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(True)
         self.rgbLabel.setVisible(True)
+        self.textCoded.setVisible(False)
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -441,6 +443,7 @@ class Window(QtWidgets.QMainWindow):
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(True)
         self.rgbLabel.setVisible(True)
+        self.textCoded.setVisible(True)
         
     def getImage(self):
 
@@ -491,11 +494,12 @@ koordinatėse')
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(False)
         self.rgbLabel.setVisible(False)
+        self.textCoded.setVisible(False)
 
     def textChangedCount(self):
         self.textCoded.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
                 font: 10pt "Microsoft YaHei"')
-        self.textCoded.setText("Jau įvedėte "+str(len(self.textEdit.toPlainText()))+" simbolį(-ius)")
+        self.textCoded.setText("Jau įvedėte "+str(len(self.textEdit.toPlainText()))+" simbolį (-ius)")
       
 
 app = QtWidgets.QApplication(sys.argv)

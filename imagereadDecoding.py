@@ -1,16 +1,34 @@
 def decoding(b, it, bits, textLength):
   #kol kart 4, nes darom kad keiciam po du bitukus ir tada turim kiekvienai
   #raidei/char 4 poras.
-  bb = (b & 3)
-  if (it < textLength*4):
-      if (it < textLength):        
-        bb = bb << 6
-      elif (textLength <= it < textLength*2):
+  if (bits == 2):
+    bb = (b & 3)
+    if (it < textLength*4):
+        if (it < textLength):        
+          bb = bb << 6
+        elif (textLength <= it < textLength*2):
+          bb = bb << 4
+        elif (textLength*2 <= it < textLength*3):
+          bb = bb << 2
+        elif (textLength*3 <= it < textLength*4):
+          bb = bb
+  elif (bits == 4):
+    bb = (b & 15)
+    if (it < textLength*2):
+      if (it < textLength):
         bb = bb << 4
-      elif (textLength*2 <= it < textLength*3):
-        bb = bb << 2
-      elif (textLength*3 <= it < textLength*4):
+      elif (textLength <= it < textLength*2):
         bb = bb
+  elif (bits == 6):    
+    if (it < textLength*2):
+      if (it < textLength):
+        bb = (b & 63) 
+        bb = bb << 2
+      elif (textLength <= it < textLength*2):
+        bb = (b & 3)
+  elif (bits == 8):
+    if (it < textLength*2):
+      bb = b
   return(bb)
 
 

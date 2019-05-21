@@ -6,45 +6,77 @@ def getSum(a, b):
 # (2) Get image width & height in pixels
 #[xs, ys] = img.size    
 
-#check if the color is not out of limit
-#def clamp(x): 
-#  return max(0, min(x, 255))
 
 #encoding function
 def encoding(intText, b, it, bits):
   #kol kart 4, nes darom kad keiciam po du bitukus ir tada turim kiekvienai
   #raidei/char 4 poras.
-  if (it < len(intText)*4):
-      m = it
-      if (it >= len(intText)):
-          m = it%len(intText)
+  bReplaced = b & 255-(2**bits-1)
+  if bits == 2 :
+    if (it < len(intText)*4):
+        m = it
+        if (it >= len(intText)):
+            m = it%len(intText)
       #dabar darau tik su dviejais bitais. bet jei reiktu su n bitu, tai
       #tada darytume taip:
       #and'int su 2**n-1 raides bitais ir 255-2**n-1 su spalvos bitais
-      bReplaced = b & 255-(2**bits-1)
-      if (it < len(intText)):
-        intText[m] = (intText[m] & 192)
-        intText[m] = intText[m] >> 6
+        # bReplaced = b & 255-(2**bits-1)
+        if (it < len(intText)):
+          intText[m] = (intText[m] & 192)
+          intText[m] = intText[m] >> 6
         
             #print(intText[letter])
-      elif (len(intText) <= it < len(intText)*2):
-        intText[m] = (intText[m] & 48)
-        intText[m] = intText[m] >> 4
+        elif (len(intText) <= it < len(intText)*2):
+          intText[m] = (intText[m] & 48)
+          intText[m] = intText[m] >> 4
             #print(bin(letter))
             #print(bin(48))
-      elif (len(intText)*2 <= it < len(intText)*3):
-        intText[m] = (intText[m] & 12)
-        intText[m] = intText[m] >> 2
+        elif (len(intText)*2 <= it < len(intText)*3):
+          intText[m] = (intText[m] & 12)
+          intText[m] = intText[m] >> 2
             #print(bin(letter))
-      elif (len(intText)*3 <= it < len(intText)*4):
-        intText[m] = (intText[m] & 3)
-      
+        elif (len(intText)*3 <= it < len(intText)*4):
+          intText[m] = (intText[m] & 3)
+        b = getSum(bReplaced, intText[m])
+        
+  elif bits == 4:
+    if (it < len(intText)*2):
+      m = it
+      if (it >= len(intText)):
+        m = it%len(intText)
+      if (it < len(intText)):
+        intText[m] = (intText[m] & 240)
+        intText[m] = intText[m] >> 4
+      elif (len(intText) <= it < len(intText)*2):
+        intText[m] = (intText[m] & 15)
       b = getSum(bReplaced, intText[m])
+  elif bits == 6:
+    if (it < len(intText)*2):
+      m = it
+      if (it >= len(intText)):
+        m = it%len(intText)
+      if (it < len(intText)):
+        intText[m] = (intText[m] & 252)
+        intText[m] = intText[m] >> 2
+      elif (len(intText) <= it < len(intText)*2):
+        intText[m] = (intText[m] & 3)
+      b = getSum(bReplaced, intText[m])
+  elif bits == 8:
+    if (it < len(intText)*2):
+      m = it
+      if (it >= len(intText)):
+        m = it%len(intText)
+      b = getSum(bReplaced, intText[m])
+
+
+
+
   return(b)
 
-#nuskaityti kaip hilberto seka        
+# gauti tik paskutinius du bitukus       
 def last2bits(hindex):
   return (hindex & 3)
+
 
 def getRGBValue(rgbValue, img_resized):
   [r, g, b] = img_resized 
@@ -57,6 +89,8 @@ def getRGBValue(rgbValue, img_resized):
 
 def rshift(val, n): return (val % 0x100000000) >> n
 
+
+#nuskaityti kaip hilberto seka 
 def hilbert2xy(hindex, N, text, bits, it, img_resized, rgbValue):
   positions = [
     [0, 0],

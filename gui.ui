@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>557</height>
+    <width>813</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="font">
@@ -26,7 +26,7 @@
    <widget class="QPushButton" name="decode">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>610</x>
       <y>430</y>
       <width>111</width>
       <height>31</height>
@@ -46,31 +46,6 @@ selection-background-color: rgb(39, 96, 166);</string>
     </property>
     <property name="text">
      <string>Dekoduoti</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="result">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>230</y>
-      <width>521</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%)</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Dekoduotas tekstas atsiras čia&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="about">
@@ -336,9 +311,9 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>-200</x>
+      <x>-540</x>
       <y>0</y>
-      <width>1351</width>
+      <width>1811</width>
       <height>51</height>
      </rect>
     </property>
@@ -356,9 +331,9 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-128</y>
+      <y>-290</y>
       <width>141</width>
-      <height>761</height>
+      <height>951</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -479,7 +454,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="labelImage">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>60</y>
       <width>271</width>
       <height>42</height>
@@ -501,7 +476,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>110</y>
       <width>231</width>
       <height>41</height>
@@ -523,9 +498,9 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QTextBrowser" name="aboutBrowser">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>50</y>
-      <width>641</width>
+      <x>150</x>
+      <y>60</y>
+      <width>651</width>
       <height>541</height>
      </rect>
     </property>
@@ -536,8 +511,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(0,0,0,0%);
-border-top-color: rgb(0,0,0,0%);</string>
+     <string notr="true"/>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -545,11 +519,13 @@ border-top-color: rgb(0,0,0,0%);</string>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;	Šios programėlės pagalba galima užkoduoti ir dekoduoti informaciją paveikslėliuose, nuotraukose.&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip užkoduoti?&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;&lt;br /&gt;	Meniu pasirinkite &amp;quot;Užkoduoti&amp;quot; skiltį. Tada pasirinkite paveikslėlį, kurį norite užkoduoti. Jeigu neturi jokio paveikslėlio, galite pasirinkti vieną iš kodavimui folderyje esančių paveikslėlių.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus paveikslėlį, įveskite kokiu pavadinimu norite išsaugoti užkoduotą paveikslėlį. Jis būtinai turi būti png formatu, kadangi kiti nuotraukos formatai saugodami keičia paveikslėlio pikselius ir taip iškraipo užkoduotą tekstą. Paveikslėlis bus išsaugomas uzkoduoti aplankale jūsų nurodytu pavadinimu. Jeigu pavadinimo nenurodysite, tai jis bus išsaugomas numatytuoju pavadinimu &amp;quot;test.png&amp;quot;. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Toliau galite pasirinkti kurioje rgb kodo spalvoje norite užkoduoti informaciją. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus parametrus, įveskite tekstą, kurį norite užkoduoti.&lt;br /&gt;Atkreipkite dėmesį į galimų simbolių kiekį. Jeigu norimo užkoduoti teksto simbolių skaičius viršys galima užkoduoti, tai bus užkoduota tik dalis teksto. &lt;br /&gt;Užkodavus tekstą, galite palyginti paveikslėlį prieš kodavimą ir po kodavimo. &lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkimus dekodavimo skiltį, reikia jau turėti užkoduotą paveiksliuką. Norint dekoduoti, taip pat reikia žinoti teksto ilgį, kitaip dekoduoti nebus galima. &lt;br /&gt;Taip pat sukurta yra ir paveikslėlių palyginimo skiltis, kurioje galime matyti, kaip užkoduotas paveikslėlis skirsis nuo pradinio mūsų paveikslėlio.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip užkoduoti?&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;&lt;br /&gt;	Meniu pasirinkite &amp;quot;Užkoduoti&amp;quot; skiltį. Tada pasirinkite paveikslėlį, kurį norite užkoduoti. Jeigu neturi jokio norimo paveikslėlio, galite pasirinkti vieną iš „kodavimui&amp;quot; folderyje esančių numatytųjų paveikslėlių.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus paveikslėlį, įveskite kokiu pavadinimu norite išsaugoti užkoduotą paveikslėlį. Jis būtinai turi būti &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;png&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt; formatu, kadangi kiti nuotraukos formatai saugodami keičia paveikslėlio pikselius ir taip iškraipo užkoduotą tekstą. Paveikslėlis bus išsaugomas  „uzkoduoti&amp;quot; aplankale jūsų nurodytu pavadinimu. Jeigu pavadinimo nenurodysite, tai jis bus išsaugomas numatytuoju pavadinimu „test.png&amp;quot;. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Toliau galite pasirinkti kurioje rgb kodo spalvoje bei keliuose bitukuose norite užkoduoti informaciją.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus parametrus, įveskite tekstą, kurį norite užkoduoti.&lt;br /&gt;Atkreipkite dėmesį į galimų simbolių kiekį. Jeigu norimo užkoduoti teksto simbolių skaičius viršys galima užkoduoti, tai bus užkoduota tik dalis teksto. &lt;br /&gt;Užkodavus tekstą, galite palyginti paveikslėlį prieš kodavimą ir po kodavimo.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip dekoduoti?&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkimus dekodavimo skiltį, reikia jau turėti užkoduotą paveiksliuką. Norint dekoduoti, taip pat reikia žinoti teksto ilgį, kurioje rgb spalvos kodo dalyje bei keliuose bitukuose buvo koduojama. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#ffffff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip pamatyti užkoduotą ir dekoduotą paveikslėlius kartu?&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;&lt;br /&gt;Tam atlikti yra du skirtingi būdai. &lt;br /&gt;Pirmasis, tai tik užkodavus kodą, atsiranda mygtukas „Palyginti paveikslėlius&amp;quot;, kurį paspaudus galime matyti abu paveikslėlius. &lt;br /&gt;Kitas variantas yra meniu skiltyje pasirinkti „Palyginti paveikslėlius&amp;quot;. Šiame lange galima pasirinkti du skirtingus paveikslėlius, kuriuos pavaizduos vieną šalia kito. &lt;br /&gt;Kad gautumėte gražų vaizdavimą, nesirinkite didesnių nei 500x570 dydžio paveikslėliu. Pasirinkus didesnį nei nurodytas dydis, nebus matomas viso dydžio paveikslėlis.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#ffffff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
@@ -616,7 +592,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QPushButton" name="compareImage">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>570</x>
       <y>470</y>
       <width>151</width>
       <height>41</height>
@@ -641,7 +617,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="labelName">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>110</y>
       <width>281</width>
       <height>41</height>
@@ -657,7 +633,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string notr="true">background-color: rgba(0,0,0,0%)</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto paveiksliuko pavadinimą&lt;br/&gt;*Rašykite su .png išplėtiniu&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto paveiksliuko pavadinimą&lt;br/&gt;*Rašykite su .png plėtiniu&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="decodedname">
@@ -902,7 +878,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">bacground-color: rgba(0,0,0,0%)</string>
+     <string notr="true">bacground-color: rgba(0,0,0,0%);</string>
     </property>
     <item>
      <property name="text">
@@ -943,7 +919,7 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="rgbLabel">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>150</y>
       <width>241</width>
       <height>41</height>
@@ -959,7 +935,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string notr="true">background-color: rgba(0,0,0,0%)</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasrinkite rgb spalvos dalį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite rgb spalvos dalį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="textCoded">
@@ -984,13 +960,130 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QSpinBox" name="bitSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>200</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="minimum">
+     <number>2</number>
+    </property>
+    <property name="maximum">
+     <number>8</number>
+    </property>
+    <property name="singleStep">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bitsLabel">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>200</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite, keliuose bitukuose norite koduoti&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="result">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>240</y>
+      <width>571</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="browse2">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>110</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(34, 88, 145);
+gridline-color: rgb(202, 202, 202);
+selection-color: rgb(85, 255, 255);
+selection-background-color: rgb(39, 96, 166);</string>
+    </property>
+    <property name="text">
+     <string>Ieškoti</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imagePath2">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>10</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imageName2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>110</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0%)</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite antrąjį paveikslėlį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <zorder>imagePath2</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
    <zorder>label1</zorder>
    <zorder>imagepath</zorder>
    <zorder>label_3</zorder>
    <zorder>decode</zorder>
-   <zorder>result</zorder>
    <zorder>about</zorder>
    <zorder>encodedMenu</zorder>
    <zorder>decodedMenu</zorder>
@@ -1009,6 +1102,11 @@ selection-background-color: rgb(39, 96, 166);</string>
    <zorder>rgbLabel</zorder>
    <zorder>textCoded</zorder>
    <zorder>symbols</zorder>
+   <zorder>bitSpinBox</zorder>
+   <zorder>bitsLabel</zorder>
+   <zorder>result</zorder>
+   <zorder>browse2</zorder>
+   <zorder>imageName2</zorder>
    <zorder>aboutBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1016,7 +1114,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>780</width>
+     <width>813</width>
      <height>21</height>
     </rect>
    </property>

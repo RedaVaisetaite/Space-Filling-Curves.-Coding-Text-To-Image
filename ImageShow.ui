@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>741</width>
-    <height>484</height>
+    <width>1122</width>
+    <height>695</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>120</x>
      <y>0</y>
      <width>211</width>
      <height>31</height>
@@ -41,7 +41,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>780</x>
      <y>0</y>
      <width>211</width>
      <height>31</height>
@@ -63,10 +63,10 @@
   <widget class="QLabel" name="image2">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>610</x>
      <y>30</y>
-     <width>410</width>
-     <height>508</height>
+     <width>501</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -81,8 +81,8 @@
     <rect>
      <x>10</x>
      <y>30</y>
-     <width>381</width>
-     <height>401</height>
+     <width>501</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -95,8 +95,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>620</y>
+     <x>240</x>
+     <y>650</y>
      <width>829</width>
      <height>23</height>
     </rect>

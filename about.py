@@ -53,9 +53,15 @@ def highestPowerof2(n):
 
 def decodedCycle(N, textLength, bits, it, img_resized, rgbValue):
     decodedText = []
+    if (bits == 2):
+        nBits = 4
+    elif (bits == 4 or bits == 6):
+        nBits = 2
+    elif (bits == 8):
+        nBits = 1
     for i in range(0,N*N):
-        if (it < textLength * 4):
-            letter = imagereadDecoding.hilbert2xy(i, N, textLength, 2, it, img_resized, rgbValue)
+        if (it < textLength * nBits):
+            letter = imagereadDecoding.hilbert2xy(i, N, textLength, bits, it, img_resized, rgbValue)
             m = it
             if (it >= textLength):
                 m = it%textLength
@@ -77,6 +83,7 @@ class Window(QtWidgets.QMainWindow):
         self.decodedMenu.setStyleSheet(StyleSheet)
         self.encodedMenu.setStyleSheet(StyleSheet)
         self.browse.setStyleSheet(StyleSheet1)
+        self.browse.setStyleSheet(StyleSheet1)
         self.encode.setStyleSheet(StyleSheet1)
         self.decode.setStyleSheet(StyleSheet1)
         self.compare.setStyleSheet(StyleSheet1)
@@ -87,6 +94,7 @@ class Window(QtWidgets.QMainWindow):
         self.compareImage.clicked.connect(self.compareImage_clicked)
         self.encode.clicked.connect(self.encodeButton_clicked)
         self.browse.clicked.connect(self.getImage)
+        self.browse2.clicked.connect(self.getImage2)
         self.compare.clicked.connect(self.compareMenu_clicked)
         self.textEdit.textChanged.connect(self.textChangedCount)
         self.RGBcomboBox.setStyleSheet('color: white; font: 10pt "Microsoft YaHei"')
@@ -96,6 +104,8 @@ class Window(QtWidgets.QMainWindow):
         
         textLength = self.textLength.value()
         imagePath = self.imagepath.text()
+        
+
         if Path(imagePath).is_file():
             img = Image.open(imagePath)
             #uzsikraunam pikselius
@@ -103,7 +113,18 @@ class Window(QtWidgets.QMainWindow):
             [xs, ys] = img.size
          
             N = highestPowerof2(min(xs,ys))
-            symbolsCount = N*N/4
+            # symbolsCount = N*N/4
+            bits = int(self.bitSpinBox.value())
+            if (bits == 2):
+                symbolsCount = N*N/4
+                nBits = 4
+            elif (bits == 4 or bits == 6):
+                symbolsCount = N*N/2
+                nBits = 2
+            elif (bits == 8):
+                symbolsCount = N*N
+                nBits = 1
+
             decodedText = []
             it = 0
             rgbValue = str(self.RGBcomboBox.currentText())
@@ -111,13 +132,13 @@ class Window(QtWidgets.QMainWindow):
             if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
                 if (textLength > symbolsCount):
                     textLength = symbolsCount
-                decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue)
+                decodedText, it = decodedCycle(N, textLength, bits, it, img_resized, rgbValue)
 
             elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
                 rgbValue = rgbValue.split(' ')
 
                 if (textLength <= symbolsCount):
-                    decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue[0])
+                    decodedText, it = decodedCycle(N, textLength, bits, it, img_resized, rgbValue[0])
 
                 else:     
                     lastText = textLength - symbolsCount
@@ -127,11 +148,11 @@ class Window(QtWidgets.QMainWindow):
                     nextletter = symbolsCount
                     it1 = 0
                     it2 = lastText  
-                    decodedText, it = decodedCycle(N, int(symbolsCount), 2, it, img_resized, rgbValue[0]) 
+                    decodedText, it = decodedCycle(N, int(symbolsCount), bits, it, img_resized, rgbValue[0]) 
                     
                     for i in range(0,N*N):
-                        if (it1 < lastText * 4):
-                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it1, img_resized, rgbValue[1])                         
+                        if (it1 < lastText * nBits):
+                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, bits, it1, img_resized, rgbValue[1])                         
                             m = it1
                             if (nextletter >= textLength):                                
                                 if (it1==lastText*2):
@@ -162,7 +183,7 @@ class Window(QtWidgets.QMainWindow):
                     lastText2 = symbolsCount
 
                 if (textLength < symbolsCount): 
-                    decodedText, it = decodedCycle(N, textLength, 2, it, img_resized, rgbValue[0])
+                    decodedText, it = decodedCycle(N, textLength, bits, it, img_resized, rgbValue[0])
 
                 lastText = int(lastText)
                 nextletter = symbolsCount
@@ -173,14 +194,14 @@ class Window(QtWidgets.QMainWindow):
                 it4 = 0 
 
                 if (textLength >= symbolsCount):
-                    decodedText, it = decodedCycle(N, int(symbolsCount), 2, it, img_resized, rgbValue[0])   
+                    decodedText, it = decodedCycle(N, int(symbolsCount), bits, it, img_resized, rgbValue[0])   
 
                     for i in range(0,N*N):
                         # print('antras for veikia')
                     #print('nextvisad ', nextletter)
-                        if (it1 < lastText * 4):
+                        if (it1 < lastText * nBits):
                         #print(it1)
-                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, 2, it1, img_resized, rgbValue[1])
+                            letter = imagereadDecoding.hilbert2xy(i, N, lastText, bits, it1, img_resized, rgbValue[1])
                                 #m = it1                            
                             m = it1
                             gg = 0
@@ -205,9 +226,9 @@ class Window(QtWidgets.QMainWindow):
 
                 if (textLength >= symbolsCount*2): 
                     for i in range(0,N*N):
-                        if (it4 < lastText2 * 4):
+                        if (it4 < lastText2 * nBits):
                         #print(it1)
-                            letter = imagereadDecoding.hilbert2xy(i, N, lastText2, 2, it4, img_resized, rgbValue[2])
+                            letter = imagereadDecoding.hilbert2xy(i, N, lastText2, bits, it4, img_resized, rgbValue[2])
                                 #m = it1                            
                             m = it4
                             if (nextletter2 >= textLength):                                
@@ -257,14 +278,15 @@ class Window(QtWidgets.QMainWindow):
         pixmapDecoded = QPixmap(imagedecoded)
         #print(imageencoded)
         Dialog.image1.setPixmap(QPixmap(pixmapEncoded))
-        #Dialog.image1.resize(pixmapEncoded.width(), pixmapEncoded.height())
+        Dialog.image1.resize(pixmapEncoded.width(), pixmapEncoded.height())
         Dialog.image2.setPixmap(QPixmap(pixmapDecoded))
         Dialog.image2.resize(pixmapDecoded.width(), pixmapDecoded.height()) 
-        Dialog.resize(pixmapDecoded.width()+pixmapEncoded.width(), pixmapDecoded.height())   
+        # Dialog.resize(pixmapDecoded.width()+pixmapEncoded.width(), pixmapDecoded.height())   
         Dialog.show()
         Dialog.exec_()
 
     def encodeButton_clicked(self):
+        self.textCoded.setVisible(False)
         imagePath = self.imagepath.text()
         if Path(imagePath).is_file():
             img = Image.open(imagePath)
@@ -273,7 +295,18 @@ class Window(QtWidgets.QMainWindow):
             [xs,ys] = img.size
 
             N = highestPowerof2(min(xs,ys))
-            symbolsCount = N*N/4
+
+            #padaryti per gui paskui
+            bits = int(self.bitSpinBox.value()) 
+            if (bits == 2):
+                symbolsCount = N*N/4
+                nBits = 4
+            elif (bits == 4 or bits == 6):
+                symbolsCount = N*N/2
+                nBits = 2
+            elif (bits == 8):
+                symbolsCount = N*N
+                nBits = 1               
             # /4, nes koduojam po du bitukus, 
             # tai viena baitui uzkoduoti reikia 4pikseliu
 
@@ -289,17 +322,17 @@ class Window(QtWidgets.QMainWindow):
                     text = text[:int(symbolsCount)]
                     textLength = symbolsCount
                 for i in range(0,N*N):  
-                    if (it < len(text) * 4):
-                        imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue)
+                    if (it < len(text) * nBits):
+                        imagereadEncoding.hilbert2xy(i,N, text, bits, it, img_resized, rgbValue)
                         it = it + 1
 
             elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
                 rgbValue = rgbValue.split(' ') 
 
-                if (it < len(text) * 4):
+                if (it < len(text) * nBits):
                     if (len(text) <= symbolsCount):
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue[0])
+                            imagereadEncoding.hilbert2xy(i,N, text, bits, it, img_resized, rgbValue[0])
                             it = it + 1
                     else:
                         text1 = text[:int(symbolsCount)]
@@ -309,18 +342,18 @@ class Window(QtWidgets.QMainWindow):
                             textLength = int(symbolsCount*2)
 
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text1, 2, it, img_resized, rgbValue[0])
+                            imagereadEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
                             it = it + 1
 
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, textLast, 2, it1, img_resized, rgbValue[1])
+                            imagereadEncoding.hilbert2xy(i,N, textLast, bits, it1, img_resized, rgbValue[1])
                             it = it + 1 
                             it1 = it1 + 1
 
             elif rgbValue == 'r g b':
                 rgbValue = rgbValue.split(' ')
 
-                if (it < len(text) * 4):
+                if (it < len(text) * nBits):
                     text1 = ''
                     text2 = ''
                     textLast = ''
@@ -337,11 +370,11 @@ class Window(QtWidgets.QMainWindow):
 
                     if (len(text) > symbolsCount):                       
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text1, 2, it, img_resized, rgbValue[0])
+                            imagereadEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
                             it = it + 1
 
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text2, 2, it1, img_resized, rgbValue[1])
+                            imagereadEncoding.hilbert2xy(i,N, text2, bits, it1, img_resized, rgbValue[1])
                             it = it + 1 
                             it1 = it1 + 1
 
@@ -353,7 +386,7 @@ class Window(QtWidgets.QMainWindow):
 
                     if (len(text) < symbolsCount):
                         for i in range(0,N*N):
-                            imagereadEncoding.hilbert2xy(i,N, text, 2, it, img_resized, rgbValue[0])
+                            imagereadEncoding.hilbert2xy(i,N, text, bits, it, img_resized, rgbValue[0])
                             it = it + 1
 
 
@@ -396,6 +429,10 @@ class Window(QtWidgets.QMainWindow):
         self.RGBcomboBox.setVisible(False)
         self.rgbLabel.setVisible(False)
         self.textCoded.setVisible(False)
+        self.bitsLabel.setVisible(False)
+        self.bitSpinBox.setVisible(False)
+        self.browse2.setVisible(False)
+        self.imageName2.setVisible(False)
 
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -420,6 +457,10 @@ class Window(QtWidgets.QMainWindow):
         self.RGBcomboBox.setVisible(True)
         self.rgbLabel.setVisible(True)
         self.textCoded.setVisible(False)
+        self.bitsLabel.setVisible(True)
+        self.bitSpinBox.setVisible(True)
+        self.browse2.setVisible(False)
+        self.imageName2.setVisible(False)
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -444,6 +485,10 @@ class Window(QtWidgets.QMainWindow):
         self.RGBcomboBox.setVisible(True)
         self.rgbLabel.setVisible(True)
         self.textCoded.setVisible(True)
+        self.bitsLabel.setVisible(True)
+        self.bitSpinBox.setVisible(True)
+        self.browse2.setVisible(False)
+        self.imageName2.setVisible(False)
         
     def getImage(self):
 
@@ -472,14 +517,36 @@ koordinatėse')
 
     # def imageName_clicked(self):
     #     self.imagename.setText("")
+
+    def getImage2(self):
+
+      cwd = os.getcwd()
+      fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file',
+                            cwd, "Image files (*.jpg *.jpeg, *.png)")
+      # print(fname[0])
+      if Path(fname[0]).is_file():
+        # print('aaaa')
+        imagePath = fname[0]
+        img = Image.open(imagePath)
+        img_resized = img.load() #uzsikraunam pikselius
+        [xs,ys] = img.size
+        N = highestPowerof2(min(xs,ys))
+        symbolsCount = N*N/4*3
+        imageName = imagePath.split("/")[-1]
+        self.decodedname.setText(imageName)
+        self.imagePath2.setText(imagePath)
+
+
     def compareMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
-        self.labelImage.setText("Pasirinkite norimą užkoduoti paveikslėlį")        
+        self.labelImage.setText("Pasirinkite pirmąjį paveikslėlį")        
         self.labelImage.setVisible(True)
-        self.symbols.setVisible(False)
         self.labelName.setVisible(False)
-        self.decodedname.setVisible(False)
+        self.symbols.setVisible(False)
+        self.imageName2.setVisible(True)
+        self.decodedname.setVisible(True)
+        self.decodedname.setText("Arba įveskite kelią")
         self.compareImage.setVisible(True)
         self.textLength.setVisible(False)
         self.textEdit.setVisible(False)
@@ -495,6 +562,9 @@ koordinatėse')
         self.RGBcomboBox.setVisible(False)
         self.rgbLabel.setVisible(False)
         self.textCoded.setVisible(False)
+        self.bitsLabel.setVisible(False)
+        self.bitSpinBox.setVisible(False)
+        self.browse2.setVisible(True)
 
     def textChangedCount(self):
         self.textCoded.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\

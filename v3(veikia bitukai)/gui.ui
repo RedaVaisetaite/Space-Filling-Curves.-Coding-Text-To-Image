@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
-    <height>656</height>
+    <width>813</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="font">
@@ -27,7 +27,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>540</y>
+      <y>430</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -477,8 +477,8 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>100</y>
-      <width>291</width>
+      <y>110</y>
+      <width>231</width>
       <height>41</height>
      </rect>
     </property>
@@ -492,7 +492,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string notr="true">background-color: rgba(0,0,0,0%)</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto teksto ilgį/failo dydį baitais&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite užkoduoto teksto ilgį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="aboutBrowser">
@@ -500,7 +500,7 @@ selection-background-color: rgb(39, 96, 166);</string>
      <rect>
       <x>150</x>
       <y>60</y>
-      <width>691</width>
+      <width>651</width>
       <height>541</height>
      </rect>
     </property>
@@ -521,10 +521,9 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;	Šios programėlės pagalba galima užkoduoti ir dekoduoti informaciją paveikslėliuose, nuotraukose.&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip užkoduoti?&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;&lt;br /&gt;	Meniu pasirinkite &amp;quot;Užkoduoti&amp;quot; skiltį. Tada pasirinkite paveikslėlį, kurį norite užkoduoti. Jeigu neturi jokio norimo paveikslėlio, galite pasirinkti vieną iš „kodavimui&amp;quot; folderyje esančių numatytųjų paveikslėlių.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus paveikslėlį, įveskite kokiu pavadinimu norite išsaugoti užkoduotą paveikslėlį. Jis būtinai turi būti &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;png&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt; formatu, kadangi kiti nuotraukos formatai saugodami keičia paveikslėlio pikselius ir taip iškraipo užkoduotą tekstą. Paveikslėlis bus išsaugomas  „uzkoduoti&amp;quot; aplankale jūsų nurodytu pavadinimu. Jeigu pavadinimo nenurodysite, tai jis bus išsaugomas numatytuoju pavadinimu „test.png&amp;quot;. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Tada turite pasirinkti, ką norite užkoduoti: ar kažkokį failą (audio, tekstinį, paveiksliuką) arba tekstą iš įvesties. Tekstą iš įvesties rinkitės, kai jūsų tekstas yra trumpas - iki 500 simbolių.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Toliau galite pasirinkti kurioje rgb kodo spalvoje bei keliuose bitukuose norite užkoduoti informaciją.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus parametrus, įveskite tekstą, kurį norite užkoduoti, jeigu pasirinkote koduoti tekstą iš įvesties.&lt;br /&gt;Atkreipkite dėmesį į galimų simbolių kiekį. Jeigu norimo užkoduoti teksto simbolių skaičius viršys galima užkoduoti, tai bus užkoduota tik dalis teksto, o failas nebus koduojamas.&lt;br /&gt;Užkodavus tekstą/failą, galite pamatyti paveikslėlį prieš kodavimą ir po kodavimo paspaudus „Pavaizduoti paveikslėlius&amp;quot; mygtuką.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip dekoduoti?&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkimus dekodavimo skiltį, reikia jau turėti užkoduotą paveiksliuką. Norint dekoduoti, taip pat reikia žinoti teksto ilgį arba failo dydį baitais, kurioje rgb spalvos kodo dalyje bei keliuose bitukuose buvo koduojama.&lt;br /&gt;Dekoduojant failą reikia nurodyti failą, kuriame norite gauti dekoduotą informaciją. Jo nenurodžius, dekoduotas resultatas bus saugomas „result.txt&amp;quot; faile, „uzkoduoti&amp;quot; aplankale. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkus parametrus, įveskite tekstą, kurį norite užkoduoti.&lt;br /&gt;Atkreipkite dėmesį į galimų simbolių kiekį. Jeigu norimo užkoduoti teksto simbolių skaičius viršys galima užkoduoti, tai bus užkoduota tik dalis teksto. &lt;br /&gt;Užkodavus tekstą, galite palyginti paveikslėlį prieš kodavimą ir po kodavimo.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip dekoduoti?&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkimus dekodavimo skiltį, reikia jau turėti užkoduotą paveiksliuką. Norint dekoduoti, taip pat reikia žinoti teksto ilgį, kurioje rgb spalvos kodo dalyje bei keliuose bitukuose buvo koduojama. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#ffffff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Kaip pamatyti užkoduotą ir dekoduotą paveikslėlius kartu?&lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;&lt;br /&gt;Tam atlikti yra du skirtingi būdai. &lt;br /&gt;Pirmasis, tai tik užkodavus kodą, atsiranda mygtukas „Palyginti paveikslėlius&amp;quot;, kurį paspaudus galime matyti abu paveikslėlius. &lt;br /&gt;Kitas variantas yra meniu skiltyje pasirinkti „Palyginti paveikslėlius&amp;quot;. Šiame lange galima pasirinkti du skirtingus paveikslėlius, kuriuos pavaizduos vieną šalia kito. &lt;br /&gt;Kad gautumėte gražų vaizdavimą, nesirinkite didesnių nei 500x570 dydžio paveikslėliu. Pasirinkus didesnį nei nurodytas dydis, nebus matomas viso dydžio paveikslėlis.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#ffffff;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -534,7 +533,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>380</y>
+      <y>300</y>
       <width>421</width>
       <height>31</height>
      </rect>
@@ -556,7 +555,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>410</y>
+      <y>330</y>
       <width>561</width>
       <height>91</height>
      </rect>
@@ -568,8 +567,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="encode">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>540</y>
+      <x>600</x>
+      <y>430</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -594,7 +593,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>570</y>
+      <y>470</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -655,7 +654,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>320</y>
+      <y>260</y>
       <width>541</width>
       <height>41</height>
      </rect>
@@ -921,7 +920,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>160</y>
+      <y>150</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -942,8 +941,8 @@ selection-background-color: rgb(39, 96, 166);</string>
    <widget class="QLabel" name="textCoded">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>506</y>
+      <x>150</x>
+      <y>430</y>
       <width>361</width>
       <height>21</height>
      </rect>
@@ -959,6 +958,28 @@ selection-background-color: rgb(39, 96, 166);</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="bitSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>200</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="minimum">
+     <number>2</number>
+    </property>
+    <property name="maximum">
+     <number>8</number>
+    </property>
+    <property name="singleStep">
+     <number>2</number>
     </property>
    </widget>
    <widget class="QLabel" name="bitsLabel">
@@ -987,9 +1008,9 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>410</y>
+      <y>240</y>
       <width>571</width>
-      <height>121</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1038,7 +1059,7 @@ selection-background-color: rgb(39, 96, 166);</string>
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>100</y>
+      <y>110</y>
       <width>281</width>
       <height>41</height>
      </rect>
@@ -1056,321 +1077,6 @@ selection-background-color: rgb(39, 96, 166);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite antrąjį paveikslėlį&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>460</y>
-      <width>118</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="bitsComboBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>200</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>8</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QRadioButton" name="radioButtonFile">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>240</y>
-      <width>61</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Failą</string>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_2</string>
-    </attribute>
-   </widget>
-   <widget class="QRadioButton" name="radioButtonText">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>240</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-font: 10pt &quot;Microsoft YaHei&quot;;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Tekstą iš įvesties</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup_2</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="radioButtonLabel">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>250</y>
-      <width>121</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-font: 10pt &quot;Microsoft YaHei&quot;;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Norite užkoduoti: </string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="browseFile">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>370</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(34, 88, 145);
-gridline-color: rgb(202, 202, 202);
-selection-color: rgb(85, 255, 255);
-selection-background-color: rgb(39, 96, 166);</string>
-    </property>
-    <property name="text">
-     <string>Ieškoti</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="encodeFileName">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>370</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255,255,255)
-</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="fileBrowserLabel">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>360</y>
-      <width>281</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%)</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Pasirinkite norimą užkoduoti failą&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="filePath">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>20</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="dradioButtonFile">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>240</y>
-      <width>61</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Failą</string>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="dradioButtonLabel">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>250</y>
-      <width>121</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-font: 10pt &quot;Microsoft YaHei&quot;;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Norite dekoduoti: </string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="dradioButtonText">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>240</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei</family>
-      <pointsize>10</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-font: 10pt &quot;Microsoft YaHei&quot;;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>Tekstą iš įvesties</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">buttonGroup</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="resultFileLabel">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>280</y>
-      <width>261</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(0,0,0,0%);
-font: 10pt &quot;Microsoft YaHei&quot;;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Įveskite failo pavadinimą rezultatams.&lt;br/&gt;*Rašykite su failo plėtiniu (*.txt, *png, ...)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="resultFileName">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>280</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255,255,255)
-</string>
-    </property>
-   </widget>
-   <zorder>aboutBrowser</zorder>
-   <zorder>filePath</zorder>
    <zorder>imagePath2</zorder>
    <zorder>textEdit</zorder>
    <zorder>encode</zorder>
@@ -1396,30 +1102,19 @@ color: white;</string>
    <zorder>rgbLabel</zorder>
    <zorder>textCoded</zorder>
    <zorder>symbols</zorder>
+   <zorder>bitSpinBox</zorder>
    <zorder>bitsLabel</zorder>
    <zorder>result</zorder>
    <zorder>browse2</zorder>
    <zorder>imageName2</zorder>
-   <zorder>progressBar</zorder>
-   <zorder>bitsComboBox</zorder>
-   <zorder>radioButtonFile</zorder>
-   <zorder>radioButtonText</zorder>
-   <zorder>radioButtonLabel</zorder>
-   <zorder>browseFile</zorder>
-   <zorder>encodeFileName</zorder>
-   <zorder>fileBrowserLabel</zorder>
-   <zorder>dradioButtonFile</zorder>
-   <zorder>dradioButtonLabel</zorder>
-   <zorder>dradioButtonText</zorder>
-   <zorder>resultFileLabel</zorder>
-   <zorder>resultFileName</zorder>
+   <zorder>aboutBrowser</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>848</width>
+     <width>813</width>
      <height>21</height>
     </rect>
    </property>
@@ -1428,8 +1123,4 @@ color: white;</string>
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
- </buttongroups>
 </ui>

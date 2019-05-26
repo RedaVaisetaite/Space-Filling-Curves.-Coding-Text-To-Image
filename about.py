@@ -77,7 +77,7 @@ def decodedCycle(N, textLength, bits, it, img_resized, rgbValue):
     return decodedText, it
 
 def decodeFile(N, bits, img_resized, rgbValue, newFile, filesize, nBits):
-    for i in range(0,int(filesize*nBits),4):
+    for i in range(0,int(filesize*nBits),nBits):
         if bits == 2:
             first2bits = DecodingFile.hilbert2xy(i,N, 6, bits, img_resized, rgbValue)
                     # print("2: ", first2bits)
@@ -112,8 +112,10 @@ def encodeFile(N, bits, img_resized, rgbValue, bytes_read):
         elif bits == 4:
             EncodingFile.hilbert2xy(i,N, (byte&240), bits, 4, img_resized, rgbValue)
             EncodingFile.hilbert2xy(i+1,N, (byte&15), bits, 0, img_resized, rgbValue)
+            i = i + 2 
         elif bits == 8:
             EncodingFile.hilbert2xy(i,N, (byte&255), bits, 0, img_resized, rgbValue)
+            i = i + 1
     
 
 
@@ -142,11 +144,21 @@ class Window(QtWidgets.QMainWindow):
         self.encode.clicked.connect(self.encodeButton_clicked)
         self.browse.clicked.connect(self.getImage)
         self.browse2.clicked.connect(self.getImage2)
+        self.browseFile.clicked.connect(self.getFile)
         self.compare.clicked.connect(self.compareMenu_clicked)
         self.textEdit.textChanged.connect(self.textChangedCount)
         self.progressBar.setVisible(False)
         self.RGBcomboBox.setStyleSheet('color: white; font: 10pt "Microsoft YaHei"')
+        self.radioButtonText.toggled.connect(self.radioButtonTextPressed)
+        self.radioButtonFile.toggled.connect(self.radioButtonFilePressed)
+        self.dradioButtonText.toggled.connect(self.dradioButtonTextPressed)
+        self.dradioButtonFile.toggled.connect(self.dradioButtonFilePressed)
+
+        self.RGBcomboBox.currentTextChanged.connect(self.symbolsCounting)
+        self.bitsComboBox.currentTextChanged.connect(self.symbolsCounting)
+        self.imagename.textChanged.connect(self.symbolsCounting)
     @pyqtSlot()
+
 
     
     #functions
@@ -156,7 +168,8 @@ class Window(QtWidgets.QMainWindow):
         # self.completed = 0   
 
         textLength = self.textLength.value()
-        imagePath = self.imagepath.text()        
+        imagePath = self.imagepath.text()  
+     
 
         if Path(imagePath).is_file():
             img = Image.open(imagePath)
@@ -168,34 +181,80 @@ class Window(QtWidgets.QMainWindow):
             rgbValue = str(self.RGBcomboBox.currentText())
             N = highestPowerof2(min(xs,ys))
 
+
+
+            #get bits from user 
             bits = int(self.bitsComboBox.currentText())
+
             if (bits == 2):
-                symbolsCount = N*N/4
+                symbolsCount = int(N*N/4)
                 nBits = 4
             elif (bits == 4 or bits == 6):
-                symbolsCount = N*N/2
+                symbolsCount = int(N*N/2)
                 nBits = 2
             elif (bits == 8):
-                symbolsCount = N*N
+                symbolsCount = int(N*N)
                 nBits = 1
 
             # decoding file
-            outputfile = "C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/uzkoduoti/filedecoded2.txt"
-            newFile = open(outputfile, "wb")
-            filesize=100
-            file = 1
+            if self.dradioButtonFile.isChecked() == True:
+                file = 1
+            else:
+                file = 0
+
             if file == 1:
-                decodeFile(N, bits, img_resized, rgbValue, newFile, filesize, nBits)
-            
+
+                #for file coding
+                if not self.resultFileName.text():
+                    resultFile = 'result.txt'
+                else:
+                    resultFile = str(self.resultFileName.text())
+                outputfile = "C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/uzkoduoti/"+resultFile
+                newFile = open(outputfile, "wb")
+                filesize=int(self.textLength.value())
+                if (rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b'):
+                    decodeFile(N, bits, img_resized, rgbValue, newFile, filesize, nBits)
+
+                elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
+                    rgbValue = rgbValue.split(' ')
+                    if (filesize>symbolsCount):
+                        filesize1 = symbolsCount
+                        decodeFile(N, bits, img_resized, rgbValue[0], newFile, filesize1, nBits)
+                        filesize2 = int(filesize - filesize1)
+                        decodeFile(N, bits, img_resized, rgbValue[1], newFile, filesize2, nBits)
+                    else:
+                        filesize1 = filesize
+                        decodeFile(N, bits, img_resized, rgbValue[0], newFile, filesize1, nBits)                            
+                        
+                elif (rgbValue == 'r g b'):
+                    rgbValue = rgbValue.split(' ')
+                    if (filesize>symbolsCount):
+                        filesize1 = symbolsCount
+                    else:
+                        filesize1 = filesize
+                    decodeFile(N, bits, img_resized, rgbValue[0], newFile, filesize1, nBits)
+                    if (filesize>symbolsCount):
+                        if (filesize>(symbolsCount*2)):
+                            decodeFile(N, bits, img_resized, rgbValue[1], newFile, filesize1, nBits)
+                        else:
+                            filesize1 = int(symbolsCount*2 - filesize)
+                            decodeFile(N, bits, img_resized, rgbValue[1], newFile, filesize1, nBits)
+                    if (filesize>(symbolsCount*2)):
+                        filesize2 = int(filesize - (filesize1*2))
+                        decodeFile(N, bits, img_resized, rgbValue[2], newFile, filesize2, nBits) 
+
+                #print result to the screen for user
+                self.result.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+                    font: 10pt "Microsoft YaHei"')
+                self.result.setText("Failas dekoduotas. Jis yra išsaugotas \"uzkoduoti\" aplankale pavadinimu " + resultFile)
+            #self.textEdit.setDisabled(True)
+                self.result.setVisible(True)      
+                        
+
 
                 
                 # self.completed += 0.0001
                 # self.progressBar.setValue(self.completed)
-                    
-                    # print('i vidujdekodavimo: ', i)
-
-            # filesize = os.path.getsize(outputfile)
-            # print('filesize ', filesize)
 
 
             #decoding text from input
@@ -325,7 +384,7 @@ class Window(QtWidgets.QMainWindow):
             #self.textEdit.setDisabled(True)
                 self.result.setVisible(True)
         else:
-            self.symbols.setText("Paveisklėlis, kurį pasirinkote nerastas.\
+            self.symbols.setText("Paveikslėlis, kurį pasirinkote nerastas.\
  Pažiūrėkite, \nar nurodėte tikslią paveikslėlio vietą (tikslų kelią iki jo)")
             self.symbols.setStyleSheet('color: #ff4902; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
@@ -355,6 +414,17 @@ class Window(QtWidgets.QMainWindow):
     def encodeButton_clicked(self):
         self.textCoded.setVisible(False)
         imagePath = self.imagepath.text()
+
+        rgbMatrix = {
+            'r': 1,
+            'g': 1,
+            'b': 1,
+            'r g': 2,
+            'r b': 2,
+            'g b': 2,
+            'r g b': 3
+        } 
+
         if Path(imagePath).is_file():
             img = Image.open(imagePath)
 
@@ -364,34 +434,93 @@ class Window(QtWidgets.QMainWindow):
             N = highestPowerof2(min(xs,ys))
 
             #padaryti per gui paskui
+
+            #get information from user
             bits = int(self.bitsComboBox.currentText()) 
+            rgbValue = str(self.RGBcomboBox.currentText())
+            text = self.textEdit.toPlainText()
+            textLength = len(text)
+
             if (bits == 2):
-                symbolsCount = N*N/4
+                symbolsCount = int(N*N/4)
                 nBits = 4
             elif (bits == 4 or bits == 6):
-                symbolsCount = N*N/2
+                symbolsCount = int(N*N/2)
                 nBits = 2
             elif (bits == 8):
-                symbolsCount = N*N
-                nBits = 1               
+                symbolsCount = int(N*N)
+                nBits = 1  
+
+            fileCount = int(symbolsCount*rgbMatrix[rgbValue])  
+            print(rgbMatrix[rgbValue])          
             # /4, nes koduojam po du bitukus, 
             # tai viena baitui uzkoduoti reikia 4pikseliu
 
             it = 0
             it1 = 0
             it2 = 0
-            text = self.textEdit.toPlainText()
-            textLength = len(text)
-            rgbValue = str(self.RGBcomboBox.currentText())
-            isFile = 1
+            
+            if self.radioButtonFile.isChecked() == True :
+                isFile = 1
+            else:
+                isFile = 0
+
             # encoding file
             if isFile == 1:
-                file = "C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/kodavimui/forcoding2.txt"
-                filesize = os.path.getsize(file)
-                print('filesize: ', filesize)
-                bytes_read = open(file, "rb").read()
-                encodeFile(N, bits, img_resized, rgbValue, bytes_read)
-                img.save("C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/uzkoduoti/taigi1.png")
+                if not self.encodeFileName.text():
+                    self.symbols.setText("Paveisklėlis, kurį pasirinkote nerastas.\
+                    Pažiūrėkite, \nar nurodėte tikslią paveikslėlio vietą (tikslų kelią iki jo)")
+                    self.symbols.setStyleSheet('color: #ff4902; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+                    self.symbols.setVisible(True)
+                else: 
+                    encodingFile = str(self.encodeFileName.text())
+                    file = "C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/kodavimui/"+encodingFile
+                    filesize = os.path.getsize(file)
+                    print('filesize: ', filesize)
+                    bytes_read = open(file, "rb")
+                    if (filesize>fileCount):
+                        print("Failas yra per didelis. Pasirinkite mažesnį failą arba didesnę nuotrauką kodavimui.")
+                    else:
+                        if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
+                            bytes_read = bytes_read.read()
+                            encodeFile(N, bits, img_resized, rgbValue, bytes_read)                            
+                        elif rgbValue == 'r g' or rgbValue == 'r b' or rgbValue == 'g b':
+                            rgbValue = rgbValue.split(' ')
+                            if (filesize>symbolsCount):
+                                bytes_read1 = bytes_read.read(symbolsCount)
+                                encodeFile(N, bits, img_resized, rgbValue[0], bytes_read1)
+                                bytes_read.seek(symbolsCount,0)
+                                bytes_read2 = bytes_read.read()
+                                encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
+                            else:
+                                bytes_read1 = bytes_read.read()
+                                encodeFile(N, bits, img_resized, rgbValue[0], bytes_read1)
+                        
+                        elif rgbValue == 'r g b':
+                            rgbValue = rgbValue.split(' ')
+                        # if (filesize>symbolsCount):
+
+                            bytes_read1 = bytes_read.read(symbolsCount)
+                            encodeFile(N, bits, img_resized, rgbValue[0], bytes_read1)
+                            bytes_read.seek(symbolsCount,0)
+                            bytes_read2 = bytes_read.read()
+                            encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
+                            bytes_read.seek(int(symbolsCount*2),0)
+                            bytes_read3 = bytes_read.read()
+                            encodeFile(N, bits, img_resized, rgbValue[2], bytes_read3)
+                        if not self.decodedname.text():
+                            decodedname = "test.png"
+                        else:
+                            decodedname = self.decodedname.text()
+                        img.save("C:/Users/Burundukas/Documents/GitHub/Space-Filling-Curves.-Coding-Text-To-Image/uzkoduoti/"+decodedname)
+                        self.textEdit.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+                            font: 10pt "Microsoft YaHei"')
+                        self.textEdit.setText("Failas užkoduotas.\nUžkoduoto failo dydis baitais: "+str(filesize)+
+                            "\nUžkoduotas paveikslėlis išsaugotas „uzkoduoti\" aplankale "+decodedname+" pavadinimu")
+                self.textEdit.setVisible(True)
+                self.compareImage.setVisible(True)
+            #encoding text from input
             else:
                 # encoding text from input
                 if rgbValue == 'r' or rgbValue == 'g' or rgbValue == 'b':
@@ -510,6 +639,17 @@ class Window(QtWidgets.QMainWindow):
         self.bitsComboBox.setVisible(False)
         self.browse2.setVisible(False)
         self.imageName2.setVisible(False)
+        self.radioButtonText.setVisible(False)
+        self.radioButtonFile.setVisible(False)
+        self.radioButtonLabel.setVisible(False)
+        self.dradioButtonText.setVisible(False)
+        self.dradioButtonFile.setVisible(False)
+        self.dradioButtonLabel.setVisible(False)
+        self.resultFileName.setVisible(False)
+        self.resultFileLabel.setVisible(False)
+        self.browseFile.setVisible(False)
+        self.fileBrowserLabel.setVisible(False)
+        self.encodeFileName.setVisible(False)
 
     def decodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -538,6 +678,24 @@ class Window(QtWidgets.QMainWindow):
         self.bitsComboBox.setVisible(True)
         self.browse2.setVisible(False)
         self.imageName2.setVisible(False)
+        self.radioButtonText.setVisible(False)
+        self.radioButtonFile.setVisible(False)
+        self.radioButtonLabel.setVisible(False) #????????
+        self.browseFile.setVisible(False)
+        self.fileBrowserLabel.setVisible(False)
+        self.encodeFileName.setVisible(False)
+        self.dradioButtonText.setVisible(True)
+        self.dradioButtonFile.setVisible(True)
+        self.dradioButtonLabel.setVisible(True)
+        self.resultFileName.setVisible(True)
+        self.resultFileLabel.setVisible(True)
+        if self.dradioButtonText.isChecked() == True:
+            self.resultFileName.setVisible(False)
+            self.resultFileLabel.setVisible(False)
+        if self.dradioButtonFile.isChecked() == True:
+            self.resultFileName.setVisible(True)
+            self.resultFileLabel.setVisible(True)
+
 
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
@@ -549,23 +707,50 @@ class Window(QtWidgets.QMainWindow):
         self.decodedname.setVisible(True)
         self.compareImage.setVisible(False)
         self.textLength.setVisible(False)
-        self.textEdit.setVisible(True)
+        # self.textEdit.setVisible(True)
         self.decode.setVisible(False)
         self.encode.setVisible(True)
         self.browse.setVisible(True)
         self.imagename.setText("Arba įveskite kelią")
         self.imagename.setVisible(True)
         self.label.setVisible(False)
-        self.label1.setVisible(True)
+        # self.label1.setVisible(True)
         self.result.setVisible(False)
         self.aboutBrowser.setVisible(False)
         self.RGBcomboBox.setVisible(True)
         self.rgbLabel.setVisible(True)
-        self.textCoded.setVisible(True)
+        
         self.bitsLabel.setVisible(True)
         self.bitsComboBox.setVisible(True)
         self.browse2.setVisible(False)
         self.imageName2.setVisible(False)
+        self.radioButtonText.setVisible(True)
+        self.radioButtonFile.setVisible(True)
+        self.radioButtonLabel.setVisible(True)
+        self.browseFile.setVisible(True)
+        self.fileBrowserLabel.setVisible(True)
+        self.encodeFileName.setVisible(True)
+        self.browseFile.setVisible(False)
+        self.fileBrowserLabel.setVisible(False)
+        self.encodeFileName.setVisible(False)
+        self.dradioButtonText.setVisible(False)
+        self.dradioButtonFile.setVisible(False)
+        self.dradioButtonLabel.setVisible(False)
+        self.resultFileName.setVisible(False)
+        self.resultFileLabel.setVisible(False)
+        self.textEdit.setText("")
+        if self.radioButtonText.isChecked() == True:
+            self.label1.setVisible(True)
+            self.textEdit.setVisible(True)
+            self.textCoded.setVisible(True)
+        if self.radioButtonFile.isChecked() == True:
+            self.browseFile.setVisible(True)
+            self.fileBrowserLabel.setVisible(True)
+            self.encodeFileName.setVisible(True)
+            self.textCoded.setVisible(False)
+
+
+        
         
     def getImage(self):
 
@@ -576,21 +761,21 @@ class Window(QtWidgets.QMainWindow):
       if Path(fname[0]).is_file():
         # print('aaaa')
         imagePath = fname[0]
-        img = Image.open(imagePath)
-        img_resized = img.load() #uzsikraunam pikselius
-        [xs,ys] = img.size
-        N = highestPowerof2(min(xs,ys))
-        symbolsCount = N*N/4*3
+        # img = Image.open(imagePath)
+        # img_resized = img.load() #uzsikraunam pikselius
+        # [xs,ys] = img.size
+        # N = highestPowerof2(min(xs,ys))
+        # symbolsCount = N*N/4*3
         imageName = imagePath.split("/")[-1]
         self.imagename.setText(imageName)
         self.imagepath.setText(imagePath)
-        if (self.labelImage.text()=="Pasirinkite norimą užkoduoti paveikslėlį"):
-            self.symbols.setText('Maksimalus simbolių skaičius, kurį galite užkoduoti \
-yra '+str(int(symbolsCount))+', \njeigu pasirinksite kodavimą visose trijose rgb kodo \
-koordinatėse')
-            self.symbols.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
-            font: 10pt "Microsoft YaHei"')
-            self.symbols.setVisible(True)
+#         if (self.labelImage.text()=="Pasirinkite norimą užkoduoti paveikslėlį"):
+#             self.symbols.setText('Maksimalus simbolių skaičius, kurį galite užkoduoti \
+# yra '+str(int(symbolsCount))+', \njeigu pasirinksite kodavimą visose trijose rgb kodo \
+# koordinatėse')
+#             self.symbols.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+#             font: 10pt "Microsoft YaHei"')
+#             self.symbols.setVisible(True)
 
     # def imageName_clicked(self):
     #     self.imagename.setText("")
@@ -604,11 +789,11 @@ koordinatėse')
       if Path(fname[0]).is_file():
         # print('aaaa')
         imagePath = fname[0]
-        img = Image.open(imagePath)
-        img_resized = img.load() #uzsikraunam pikselius
-        [xs,ys] = img.size
-        N = highestPowerof2(min(xs,ys))
-        symbolsCount = N*N/4*3
+        # img = Image.open(imagePath)
+        # img_resized = img.load() #uzsikraunam pikselius
+        # [xs,ys] = img.size
+        # N = highestPowerof2(min(xs,ys))
+        # symbolsCount = N*N/4*3
         imageName = imagePath.split("/")[-1]
         self.decodedname.setText(imageName)
         self.imagePath2.setText(imagePath)
@@ -642,11 +827,87 @@ koordinatėse')
         self.bitsLabel.setVisible(False)
         self.bitsComboBox.setVisible(False)
         self.browse2.setVisible(True)
+        self.radioButtonText.setVisible(False)
+        self.radioButtonFile.setVisible(False)
+        self.radioButtonLabel.setVisible(False)
+        self.browseFile.setVisible(False)
+        self.fileBrowserLabel.setVisible(False)
+        self.encodeFileName.setVisible(False)
+        self.dradioButtonText.setVisible(False)
+        self.dradioButtonFile.setVisible(False)
+        self.dradioButtonLabel.setVisible(False)
+        self.resultFileName.setVisible(False)
+        self.resultFileLabel.setVisible(False)
 
     def textChangedCount(self):
         self.textCoded.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
                 font: 10pt "Microsoft YaHei"')
         self.textCoded.setText("Jau įvedėte "+str(len(self.textEdit.toPlainText()))+" simbolį (-ius)")
+
+    def symbolsCounting(self):
+        rgbMatrix = {
+            'r': 1,
+            'g': 1,
+            'b': 1,
+            'r g': 2,
+            'r b': 2,
+            'g b': 2,
+            'r g b': 3
+        } 
+        bits = int(self.bitsComboBox.currentText())
+        if (bits == 2):
+            nBits = 4
+        elif (bits == 4 or bits == 6):
+            nBits = 2
+        elif (bits == 8):
+            nBits = 1
+
+        if self.imagepath.text():
+            imagePath = self.imagepath.text() 
+            img = Image.open(imagePath)
+            img_resized = img.load() #uzsikraunam pikselius
+            [xs,ys] = img.size
+            N = highestPowerof2(min(xs,ys))
+            rgb = rgbMatrix[self.RGBcomboBox.currentText()]
+            symbolsCount = int(N*N)*rgb/nBits
+            self.symbols.setText('Maksimalus simbolių skaičius, kurį galite užkoduoti \
+            yra '+str(int(symbolsCount)))
+            self.symbols.setStyleSheet('color: yellow; background-color: rgba(0,0,0,0%);\
+            font: 10pt "Microsoft YaHei"')
+            self.symbols.setVisible(True)
+
+    def radioButtonFilePressed(self):
+        self.label1.setVisible(False)
+        self.textEdit.setVisible(False)
+        self.browseFile.setVisible(True)
+        self.fileBrowserLabel.setVisible(True)
+        self.encodeFileName.setVisible(True)
+        self.textCoded.setVisible(False)
+    def radioButtonTextPressed(self):
+        self.label1.setVisible(True)
+        self.textEdit.setVisible(True)
+        self.browseFile.setVisible(False)
+        self.fileBrowserLabel.setVisible(False)
+        self.encodeFileName.setVisible(False)
+        self.textCoded.setVisible(True)
+
+    def dradioButtonFilePressed(self):
+        self.resultFileLabel.setVisible(True)
+        self.resultFileName.setVisible(True)
+    def dradioButtonTextPressed(self):
+        self.resultFileLabel.setVisible(False)
+        self.resultFileName.setVisible(False)
+
+    def getFile(self):
+      cwd = os.getcwd()
+      fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file',
+                            cwd, "All files (*.*)")
+      if Path(fname[0]).is_file():
+        filePath = fname[0]
+        fileName = filePath.split("/")[-1]
+        self.encodeFileName.setText(fileName)
+        self.filePath.setText(filePath)
+
       
 
 app = QtWidgets.QApplication(sys.argv)

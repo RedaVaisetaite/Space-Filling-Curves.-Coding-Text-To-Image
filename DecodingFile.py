@@ -1,4 +1,3 @@
-
 #decoding function
 def decoding(shift, b, bits):
   if (bits == 2):
@@ -7,37 +6,8 @@ def decoding(shift, b, bits):
     bb = (b & 15)
   elif (bits == 8):
     bb = b
-  bb = bb << shift 
-        
-  # elif bits == 4:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     if (it < len(intText)):
-  #       intText[m] = (intText[m] & 240)
-  #       intText[m] = intText[m] >> 4
-  #     elif (len(intText) <= it < len(intText)*2):
-  #       intText[m] = (intText[m] & 15)
-  #     b = getSum(bReplaced, intText[m])
-  # elif bits == 6:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     if (it < len(intText)):
-  #       intText[m] = (intText[m] & 252)
-  #       intText[m] = intText[m] >> 2
-  #     elif (len(intText) <= it < len(intText)*2):
-  #       intText[m] = (intText[m] & 3)
-  #     b = getSum(bReplaced, intText[m])
-  # elif bits == 8:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     b = getSum(bReplaced, intText[m])
 
+  bb = bb << shift 
   return(bb)
 
 # gauti tik paskutinius du bitukus       
@@ -59,7 +29,6 @@ def rshift(val, n): return (val % 0x100000000) >> n
 
 #nuskaityti kaip hilberto seka 
 def hilbert2xy(hindex, N, shift, bits, img_resized, rgbValue):
-  # !!!!!!!!!!!!!!!!!! it gal net nereikia !!!!!!!!!!!!!!!!!
   positions = [
     [0, 0],
     [0, 1],
@@ -91,7 +60,6 @@ def hilbert2xy(hindex, N, shift, bits, img_resized, rgbValue):
         x = x + n2
 
       hindex = rshift(hindex, 2)
-  #print(x,y)
   color = getRGBValue(rgbValue, img_resized[x,y])   
   bb = decoding(shift, color, bits)
   return(bb)

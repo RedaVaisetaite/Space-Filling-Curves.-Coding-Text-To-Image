@@ -3,51 +3,16 @@ def getSum(a, b):
         a, b = (a ^ b), (a & b) << 1
     return a
 
-# (2) Get image width & height in pixels
-#[xs, ys] = img.size    
-
-
 #encoding function
 def encoding(fileBits, b, it, bits):
   fileBits = rshift(fileBits,it)
   bReplaced = b & 255-(2**bits-1)
-  if bits == 2 :
-    b = getSum(bReplaced, fileBits)     
-  # elif bits == 4:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     if (it < len(intText)):
-  #       intText[m] = (intText[m] & 240)
-  #       intText[m] = intText[m] >> 4
-  #     elif (len(intText) <= it < len(intText)*2):
-  #       intText[m] = (intText[m] & 15)
-  #     b = getSum(bReplaced, intText[m])
-  # elif bits == 6:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     if (it < len(intText)):
-  #       intText[m] = (intText[m] & 252)
-  #       intText[m] = intText[m] >> 2
-  #     elif (len(intText) <= it < len(intText)*2):
-  #       intText[m] = (intText[m] & 3)
-  #     b = getSum(bReplaced, intText[m])
-  # elif bits == 8:
-  #   if (it < len(intText)*2):
-  #     m = it
-  #     if (it >= len(intText)):
-  #       m = it%len(intText)
-  #     b = getSum(bReplaced, intText[m])
-
+  b = getSum(bReplaced, fileBits)     
   return(b)
 
 # gauti tik paskutinius du bitukus       
 def last2bits(hindex):
   return (hindex & 3)
-
 
 def getRGBValue(rgbValue, img_resized):
   [r, g, b] = img_resized 
@@ -63,7 +28,6 @@ def rshift(val, n): return (val % 0x100000000) >> n
 
 #nuskaityti kaip hilberto seka 
 def hilbert2xy(hindex, N, fileBits, bits, it, img_resized, rgbValue):
-  # !!!!!!!!!!!!!!!!!! it gal net nereikia !!!!!!!!!!!!!!!!!
   positions = [
     [0, 0],
     [0, 1],
@@ -95,7 +59,6 @@ def hilbert2xy(hindex, N, fileBits, bits, it, img_resized, rgbValue):
         x = x + n2
 
       hindex = rshift(hindex, 2)
-  #print(x,y)
   bb = getRGBValue(rgbValue, img_resized[x,y])   
   # intText = [int(format(ord(x), '08b'), 2) for x in text]
   bb = encoding(fileBits, bb, it, bits)
@@ -106,7 +69,7 @@ def hilbert2xy(hindex, N, fileBits, bits, it, img_resized, rgbValue):
     g = bb
   else:
     b = bb
-
+  #save with new coordinates
   img_resized[x,y] = r,g,b
       
   return(x,y)

@@ -60,7 +60,6 @@ def hilbert2xy(hindex, N, fileBits, bits, it, img_resized, rgbValue):
 
       hindex = rshift(hindex, 2)
   bb = getRGBValue(rgbValue, img_resized[x,y])   
-  # intText = [int(format(ord(x), '08b'), 2) for x in text]
   bb = encoding(fileBits, bb, it, bits)
   [r, g, b] = img_resized[x, y] 
   if (rgbValue == 'r'):

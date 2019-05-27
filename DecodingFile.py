@@ -10,7 +10,7 @@ def decoding(shift, b, bits):
   bb = bb << shift 
   return(bb)
 
-# gauti tik paskutinius du bitukus       
+# for the last two bits       
 def last2bits(hindex):
   return (hindex & 3)
 
@@ -27,7 +27,7 @@ def getRGBValue(rgbValue, img_resized):
 def rshift(val, n): return (val % 0x100000000) >> n
 
 
-#nuskaityti kaip hilberto seka 
+#read like Hilbert curve
 def hilbert2xy(hindex, N, shift, bits, img_resized, rgbValue):
   positions = [
     [0, 0],

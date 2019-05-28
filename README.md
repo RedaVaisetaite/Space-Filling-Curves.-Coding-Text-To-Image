@@ -5,6 +5,7 @@
 ## Programos reikalingi paketai
 
 Programai paleisti savo kompiuteryje reikia turėti:
+
     * Python3 programavimo kalbos mechanizmą
     * pyqt5-tools biblioteką
     * Image modulį

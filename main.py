@@ -1,7 +1,8 @@
+__author__ = "Reda Vaisetaite"
+__version__ = "$Revision: 1.0 $"
+__date__ = "$Date: 2019/05/30 $"
+
 import imageDecoding
-import numpy as np
-import mpl_toolkits.mplot3d.axes3d as p3
-import matplotlib.pyplot as plt
 import colorsys
 from PIL import Image
 import sys
@@ -687,7 +688,7 @@ class Window(QtWidgets.QMainWindow):
     def encodedMenu_clicked(self):
         self.labelImage.setStyleSheet('color: white; background-color: rgba(0,0,0,0%);\
             font: 10pt "Microsoft YaHei"')
-        self.labelImage.setText("Pasirinkite norimą užkoduoti paveikslėlį")        
+        self.labelImage.setText("Pasirinkite paveikslėlį, kuris bus naudojamas kodavimui")        
         self.labelImage.setVisible(True)
         self.symbols.setVisible(False)
         self.labelName.setVisible(True)
@@ -821,7 +822,7 @@ class Window(QtWidgets.QMainWindow):
         elif (bits == 8):
             nBits = 1
 
-        if self.imagename.text() and self.labelImage.text()=="Pasirinkite norimą užkoduoti paveikslėlį":
+        if self.imagename.text() and self.labelImage.text()=="Pasirinkite paveikslėlį, kuris bus naudojamas kodavimui":
             imagePath = self.imagename.text() 
             img = Image.open(imagePath)
             img_resized = img.load() #uzsikraunam pikselius

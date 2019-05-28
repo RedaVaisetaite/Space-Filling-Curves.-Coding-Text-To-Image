@@ -17,3 +17,4 @@ Paprastam ir lengvam paketų instaliavimui naudojamas Pip.
 Turint jį savo kompiuteryje labai paprastai galima atsisiųsti bet kokį kitą norimą Python modulį.
 Įsidiegus šiuos komponentus į kompiuterį ir esant programos pagrindiniame aplankale, 
 programą galima paprastai pasileisti su komanda: python main.py. 
+`<addr>`

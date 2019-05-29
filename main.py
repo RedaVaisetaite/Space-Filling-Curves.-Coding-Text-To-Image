@@ -473,17 +473,28 @@ class Window(QtWidgets.QMainWindow):
                             else:
                                 bytes_read1 = bytes_read.read()
                                 encodeFile(N, bits, img_resized, rgbValue[0], bytes_read1)
-                        
+
                         elif rgbValue == 'r g b':
                             rgbValue = rgbValue.split(' ')
-                            bytes_read1 = bytes_read.read(symbolsCount)
+                            if filesize > symbolsCount:
+                                filesize1 = symbolsCount
+                            else:
+                                filesize1 = filesize
+                            bytes_read1 = bytes_read.read(filesize1)
                             encodeFile(N, bits, img_resized, rgbValue[0], bytes_read1)
-                            bytes_read.seek(symbolsCount,0)
-                            bytes_read2 = bytes_read.read()
-                            encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
-                            bytes_read.seek(int(symbolsCount*2),0)
-                            bytes_read3 = bytes_read.read()
-                            encodeFile(N, bits, img_resized, rgbValue[2], bytes_read3)
+                            if filesize > symbolsCount:
+                                bytes_read.seek(filesize1,0)
+                                if filesize > int(symbolsCount*2):
+                                    bytes_read2 = bytes_read.read(filesize1)
+                                    encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
+                                else:
+                                    filesize1 = int(symbolsCount*2 - filesize)
+                                    bytes_read2 = bytes_read.read(filesize1)
+                                    encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
+                            if (filesize> int(symbolsCount*2)):  
+                                bytes_read.seek(int(symbolsCount*2),0)
+                                bytes_read3 = bytes_read.read()
+                                encodeFile(N, bits, img_resized, rgbValue[2], bytes_read3)
                         # get the feedback to user
                         if not self.decodedname.text() or not self.decodedname.text().lower().endswith('.png'):
                             decodedname = os.path.expanduser("~/Desktop/test.png")
@@ -525,15 +536,13 @@ class Window(QtWidgets.QMainWindow):
                                 textLength = int(symbolsCount*2)
 
                             for i in range(0,N*N):
-                                if (it < len(text1) * nBits):
-                                    imageEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
-                                    it = it + 1
+                                imageEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
+                                it = it + 1
 
                             for i in range(0,N*N):
-                                if (it < len(textLast) * nBits):
-                                    imageEncoding.hilbert2xy(i,N, textLast, bits, it1, img_resized, rgbValue[1])
-                                    it = it + 1 
-                                    it1 = it1 + 1
+                                imageEncoding.hilbert2xy(i,N, textLast, bits, it1, img_resized, rgbValue[1])
+                                it = it + 1 
+                                it1 = it1 + 1
 
                 elif rgbValue == 'r g b':
                     rgbValue = rgbValue.split(' ')
@@ -555,22 +564,19 @@ class Window(QtWidgets.QMainWindow):
 
                         if (len(text) > symbolsCount):                       
                             for i in range(0,N*N):
-                                if (it < len(text1) * nBits):
-                                    imageEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
-                                    it = it + 1
+                                imageEncoding.hilbert2xy(i,N, text1, bits, it, img_resized, rgbValue[0])
+                                it = it + 1
 
                             for i in range(0,N*N):
-                                if (it < len(text2) * nBits):
-                                    imageEncoding.hilbert2xy(i,N, text2, bits, it1, img_resized, rgbValue[1])
-                                    it = it + 1 
-                                    it1 = it1 + 1
+                                imageEncoding.hilbert2xy(i,N, text2, bits, it1, img_resized, rgbValue[1])
+                                it = it + 1 
+                                it1 = it1 + 1
 
                         if (len(text) > symbolsCount*2):
                             for i in range(0,N*N):
-                                if (it < len(textLast) * nBits):
-                                    imageEncoding.hilbert2xy(i,N, textLast, bits, it2, img_resized, rgbValue[2])
-                                    it = it + 1 
-                                    it2 = it2 + 1
+                                imageEncoding.hilbert2xy(i,N, textLast, bits, it2, img_resized, rgbValue[2])
+                                it = it + 1 
+                                it2 = it2 + 1
 
                         if (len(text) < symbolsCount):
                             for i in range(0,N*N):

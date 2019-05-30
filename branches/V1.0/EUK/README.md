@@ -14,9 +14,15 @@ Python programvimo kalbos mechanizmą instaliuoti galima įvairiais būdais. Kai
 
 Paprastam ir lengvam paketų instaliavimui naudojamas Pip. Kaip jį paprastai instaliuoti Windows operacinėje sistemoje galima rasti https://www.liquidweb.com/kb/install-pip-windows/ puslapyje.
 Turint jį savo kompiuteryje labai paprastai galima atsisiųsti bet kokį kitą norimą Python modulį.
+Windowa 10 operacinėje sistemoje naudokite šias komandas, norėdami instaliuoti Image ir pyqt5-tools įrankius.
 ```
 pip install Image
 pip install pyqt5-tools
+```
+Jeigu naudojate Linux operacinę sistemą:
+```
+pip3 install Image
+pip3 install pyqt5
 ```
 
 Įsidiegus šiuos komponentus į kompiuterį ir esant programos pagrindiniame aplankale, 

@@ -230,7 +230,7 @@ class Window(QtWidgets.QMainWindow):
                         if (filesize>(symbolsCount*2)):
                             decodeFile(N, bits, img_resized, rgbValue[1], newFile, filesize1, nBits)
                         else:
-                            filesize1 = int(symbolsCount*2 - filesize)
+                            filesize1 = int(filesize - symbolsCount)
                             decodeFile(N, bits, img_resized, rgbValue[1], newFile, filesize1, nBits)
                     if (filesize>(symbolsCount*2)):
                         filesize2 = int(filesize - (filesize1*2))
@@ -488,7 +488,7 @@ class Window(QtWidgets.QMainWindow):
                                     bytes_read2 = bytes_read.read(filesize1)
                                     encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
                                 else:
-                                    filesize1 = int(filesize - symbolsCount)
+                                    filesize1 = int(symbolsCount*2 - filesize)
                                     bytes_read2 = bytes_read.read(filesize1)
                                     encodeFile(N, bits, img_resized, rgbValue[1], bytes_read2)
                             if (filesize> int(symbolsCount*2)):  
